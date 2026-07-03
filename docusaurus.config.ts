@@ -6,12 +6,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Mistral Documentation Assessment',
-  tagline: 'Senior Technical Writer / Developer Educator, assessment submission',
+  tagline: 'Senior Technical Writer / Developer Educator assessment submission',
   favicon: 'img/favicon.ico',
-
-  future: {
-    v4: true,
-  },
 
   // GitHub Pages: https://jakewrites.github.io/mistral/
   url: 'https://jakewrites.github.io',
