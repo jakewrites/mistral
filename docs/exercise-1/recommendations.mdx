@@ -82,9 +82,13 @@ Six recommendations follow. Each uses the same template, **Observation, Evidence
   | Get Started | "Orient me and get me a first success" | 32 |
   | Models | "Which model, and what are its specs?" | 85 |
   | Build | "Help me build this capability" (incl. Evaluate & Ship) | 79 |
-  | Platform | "Run it on the platform" | 29 |
+  | Platform | "Use the products" (Le Chat, Vibe, Studio) | 29 |
   | Admin | "Set up my organisation" | 17 |
   | Reference | "Give me the exact source of truth" | 49 |
+
+  On Platform specifically: this is the home for the end-user **product documentation** for Le Chat (20 pages), Mistral Vibe (8), and Studio (1). It is the counterpart to Build: Build is for people building *with* the API, Platform is for people *using* the products. Grouping the three product surfaces under one section is what lets the top nav drop the separate product-named entries without leaving that content homeless.
+
+  Platform also isolates the one part of the docs that genuinely needs **versioning**. Vibe is a released CLI whose docs should track versions, so readers can find the behaviour for the version they run; Le Chat is a continuously deployed web app whose docs stay unversioned. Keeping product docs in their own section makes that mixed versioned/unversioned model easy to manage, whereas scattering the products across the nav would force a versioning decision on sections that should not have one.
 
 </Recommendation>
 
