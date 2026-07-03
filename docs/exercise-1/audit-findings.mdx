@@ -1,0 +1,78 @@
+---
+slug: /exercise-1/audit-findings
+title: 'Exercise 1 · Audit Findings'
+sidebar_label: Audit Findings
+description: The audit evidence, presented as themed findings and an explorable data set.
+---
+
+import AuditExplorer from '@site/src/components/AuditExplorer';
+import StatGrid from '@site/src/components/StatGrid';
+
+# Audit Findings
+
+The audit produced a placement decision for all 420 pages. Rather than reproduce the spreadsheet, this page presents the findings as **four themes**, each with representative evidence, and then hands you the full data set to explore.
+
+<StatGrid
+  stats={[
+    {value: '9', label: 'Exact duplicates', sub: 'Same task, multiple URLs'},
+    {value: '11', label: 'Redirect candidates', sub: 'Stale or redundant paths'},
+    {value: '26', label: 'Misfiled guides', sub: 'Filed under the wrong parent'},
+    {value: '46', label: 'Total flagged', sub: 'Of 420 pages (11%)'},
+  ]}
+/>
+
+## Finding 1, The same task lives at several URLs
+
+Quickstarts exist under three different path prefixes. The Le Chat quickstarts, for example, are reachable at both `getting-started/quickstarts/le-chat/…` and `le-chat/quickstarts/…`; the developer quickstarts at both `getting-started/quickstarts/developer/…` and `developers/quickstarts/…`.
+
+**Representative evidence:**
+
+| Current URL | Action |
+|-------------|--------|
+| `/getting-started/quickstarts/le-chat/draft-research-report` | Canonical |
+| `/le-chat/quickstarts/draft-research-report` | `REDIRECT` to canonical |
+| `/developers/quickstarts/first-api-request` | `REDIRECT` to `/getting-started/quickstarts/developer/first-api-request` |
+| `/getting-started/quickstarts/admin/configure-sso` | `DUPLICATE` of `/admin/quickstarts/configure-sso` |
+
+**Why it matters:** duplicate URLs split inbound links and search authority, and they force the reader to judge which copy is current. Consolidating to one canonical URL per task with 301 redirects fixes all three symptoms at once. See [R1](/exercise-1/recommendations#r1)
+
+## Finding 2, Guides are filed under the noun they mention
+
+The **Models** section contains guidance that a *builder* needs, filed there because it mentions models. Prompt engineering and sampling are how you *use* a model, not properties *of* one; deployment is an operational concern, not a model card.
+
+**Representative evidence:**
+
+| Current URL | Proposed placement | Action |
+|-------------|-------------------|--------|
+| `/models/best-practices/prompt-engineering` | Build / Chat & Completions / Prompting | `MOVE` |
+| `/models/best-practices/sampling` | Build / Chat & Completions / Sampling | `MOVE` |
+| `/models/deployment/*` (14 pages) | Models / Self-hosting | `MOVE` |
+| `/getting-started/glossary` | Reference / Glossary | `MOVE` |
+
+**Why it matters:** a reader who is building looks under a building verb, not under Models. Filing guidance by the noun it references is the single most common misplacement in the audit, 26 pages. See [R2](/exercise-1/recommendations#r2)
+
+## Finding 3, `Developers` is a junk drawer
+
+`Developers` is a top-level section defined by *audience* rather than *task*. Because it has no single job, it accumulates anything developer-shaped and re-hosts quickstarts that already live under Getting Started. Audience-named sections cannot enforce a content model, there is no rule for what does and does not belong.
+
+**Why it matters:** every audience-named section competes with the task-named sections for the same content, guaranteeing duplication. The fix is to dissolve `Developers` into the task-based sections and express the developer persona as a landing-page entry point instead. See [R3](/exercise-1/recommendations#r3)
+
+## Finding 4, The top navigation encodes the org chart
+
+`Le Chat`, `Studio`, `Developers`, and `Admin` are product surfaces and audiences, not user goals. A reader must first know which Mistral surface owns their task before they can navigate to it, orientation cost the docs impose before any content is read.
+
+**Why it matters:** navigation should answer "what do I want to do?" (orient, build, evaluate, ship), not "which team made this?" This is the root cause beneath Findings 1-3. See [R4](/exercise-1/recommendations#r4)
+
+## Explore the full audit
+
+Every one of the 420 pages, its proposed placement, its action flag, and the one-line rule behind it. Filter by proposed section or action, or search for any URL or rule.
+
+<AuditExplorer />
+
+:::note Reading the table
+Rows with no action flag (`, `) are already correctly placed, implicit keeps. The evidence tables above are drawn directly from the flagged rows here.
+:::
+
+:::tip Next step
+See how these findings become [Recommendations](/exercise-1/recommendations).
+:::

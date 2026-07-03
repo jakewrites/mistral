@@ -1,0 +1,234 @@
+---
+slug: /exercise-3-api-validation
+title: 'Exercise 3 · Validating the Mistral API'
+sidebar_label: 'Exercise 3: API Validation'
+description: Following Mistral's Getting Started path end to end, running every call, and documenting the gaps.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Validating the Mistral API
+
+<p className="doc-meta">Exercise 3 · Technical validation · I followed the Getting Started path, ran every call, and wrote down what actually happened.</p>
+
+The brief is to genuinely validate Mistral's APIs, so I did the thing a new developer would do: I followed the "Send your first API request" quickstart, ran the calls with a real key, then ran the embeddings endpoint too. Everything below is captured from live runs against `api.mistral.ai` on 3 July 2026, using the Python SDK `mistralai` 1.10.0 and curl.
+
+I also read the quickstart as a technical writer would, looking for places where output is missing, a command is wrong, or a prerequisite is assumed. Those findings are in [Documentation gaps I found](#documentation-gaps-i-found). The short version: the code works, but a first-time reader is left guessing what success looks like.
+
+Everything here is reproducible from the harness in the repo: [`scripts/validate_api.py`](https://github.com/jakewrites/mistral/blob/main/scripts/validate_api.py) and [`scripts/validate_api.sh`](https://github.com/jakewrites/mistral/blob/main/scripts/validate_api.sh).
+
+## Prerequisites
+
+These are what you actually need before the first call. The quickstart lists them; the separate SDK Clients page does not, which matters (see [Gap 3](#documentation-gaps-i-found)).
+
+- Python 3.9 or newer.
+- A Mistral account and an API key. Create one in Studio under API keys, then copy it.
+- The SDK: `pip install mistralai`.
+- The key in your environment, not in your code:
+
+```bash
+export MISTRAL_API_KEY="your-key"   # macOS and Linux
+# setx MISTRAL_API_KEY "your-key"   # Windows PowerShell, then reopen the shell
+```
+
+:::caution Handle the key like a password
+It is a bearer credential. Keep it in an environment variable, never in source, and never in a screenshot. Every example below reads it from `MISTRAL_API_KEY`.
+:::
+
+## Test 1: Chat completions
+
+**Endpoint:** `POST https://api.mistral.ai/v1/chat/completions` · **Model:** `mistral-large-latest`
+
+<Tabs groupId="lang">
+<TabItem value="python" label="Python" default>
+
+```python
+import os
+from mistralai import Mistral
+
+client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+
+response = client.chat.complete(
+    model="mistral-large-latest",
+    messages=[{"role": "user", "content": "What is Mistral AI? Answer in one sentence."}],
+)
+
+print(response.choices[0].message.content)
+print(response.usage)
+```
+
+</TabItem>
+<TabItem value="curl" label="curl">
+
+```bash
+curl -sS https://api.mistral.ai/v1/chat/completions \
+  -H "Authorization: Bearer $MISTRAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "mistral-large-latest",
+    "messages": [{"role": "user", "content": "What is Mistral AI? Answer in one sentence."}]
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Observed output
+
+This is the verbatim JSON the API returned, lightly reformatted for reading. Nothing here is invented.
+
+```json
+{
+  "id": "0c46aba5ae9148cdadf7dec80a278a13",
+  "object": "chat.completion",
+  "created": 1783096753,
+  "model": "mistral-large-latest",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "tool_calls": null,
+        "content": "Mistral AI is a cutting-edge AI lab based in France, focused on developing advanced large language models."
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 14,
+    "completion_tokens": 23,
+    "total_tokens": 37,
+    "prompt_tokens_details": {"cached_tokens": 0}
+  }
+}
+```
+
+The Python SDK returns the same content, with `response.usage` printing as `prompt_tokens=14 completion_tokens=23 total_tokens=37`.
+
+:::note Screenshot placeholder: Studio API key screen
+A screenshot of the Mistral Studio "API keys" page belongs here, key value redacted, showing where the credential in `MISTRAL_API_KEY` comes from. That is the one step a first-timer is most likely to miss.
+:::
+
+## Test 2: Embeddings
+
+**Endpoint:** `POST https://api.mistral.ai/v1/embeddings` · **Model:** `mistral-embed`
+
+<Tabs groupId="lang">
+<TabItem value="python" label="Python" default>
+
+```python
+import os
+from mistralai import Mistral
+
+client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+
+emb = client.embeddings.create(
+    model="mistral-embed",
+    inputs=["a puppy", "a young dog", "quarterly revenue"],   # SDK uses "inputs" (plural)
+)
+
+print(len(emb.data), "vectors of", len(emb.data[0].embedding), "dimensions")
+```
+
+</TabItem>
+<TabItem value="curl" label="curl">
+
+```bash
+curl -sS https://api.mistral.ai/v1/embeddings \
+  -H "Authorization: Bearer $MISTRAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "mistral-embed",
+    "input": ["a puppy", "a young dog", "quarterly revenue"]
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Observed output
+
+Three vectors of 1024 dimensions each, with token usage reported for input only.
+
+```text
+object:  list
+model:   mistral-embed
+count:   3
+dim:     1024
+usage:   prompt_tokens=15, total_tokens=15, completion_tokens=0
+first 3 dims of vector 0:  [-0.0432, -0.0194, 0.0463]
+```
+
+The real test of an embedding is whether the geometry matches meaning. Computing cosine similarity on the live vectors:
+
+```text
+cos("a puppy", "a young dog")        = 0.8916
+cos("a puppy", "quarterly revenue")  = 0.5843
+```
+
+That is exactly what you want to see. "A puppy" sits much closer to "a young dog" than to "quarterly revenue", which is the whole premise of [Exercise 2](/exercise-2/version-b). This one ran clean with no surprises.
+
+## Documentation gaps I found
+
+Reading and running the Getting Started content as a first-time user, here is where the docs left me guessing or gave output that did not match reality. Each row is something I would fix.
+
+| # | Gap | Evidence from running it | Suggested fix |
+|---|-----|--------------------------|---------------|
+| 1 | The quickstart never shows expected output | The "Verify" step says only "The terminal prints a short description of Mistral AI." There is no sample response, so a first-timer cannot tell a correct result from a wrong one. | Paste one real sample response (like the one above) so success is recognisable. |
+| 2 | The API reference sample response does not match live output | The reference shows an `id` like `cmpl-e5cc70bb...` and `created` as the string `"1702256327"`. Live, the `id` is bare hex (`0c46aba5...`) and `created` is an integer (`1783096753`). | Regenerate the sample from a real call so field formats are accurate. |
+| 3 | The SDK Clients page assumes the key is set but never explains it | It gives `pip install mistralai` and code that reads `os.environ["MISTRAL_API_KEY"]`, but nothing about obtaining or setting the key. A reader who starts there hits a `KeyError` on the first run. | Add a two-line key setup block, or link prominently to the quickstart step that covers it. |
+| 4 | The embeddings field name differs between REST and SDK, and this is not called out | REST expects `input` (singular). The Python SDK expects `inputs` (plural). Copying one into the other fails. | State both field names side by side on the embeddings page. |
+| 5 | Error status codes are not documented, and they are not what you would guess | An unknown model returns HTTP 400 (`invalid_model`, code 1500), not a 422 validation error. A bad key returns `{"detail":"Unauthorized"}` with 401. | Add a short error table with real status codes and bodies. |
+
+:::note What this exercise is really testing
+Points 1 to 3 are ordinary content gaps that are cheap to close and that every new user hits. Point 4 is the kind of cross-surface inconsistency that only shows up when you actually run both paths. Point 5 is why "validate, do not assume" matters: I guessed 422 for a bad model and the API returned 400.
+:::
+
+## Troubleshooting
+
+Real errors I hit or deliberately triggered while validating, with the actual response bodies.
+
+| Symptom | HTTP | What the API returned | Fix |
+|---------|------|-----------------------|-----|
+| Bad or missing key | 401 | `{"detail":"Unauthorized"}` | Check `echo $MISTRAL_API_KEY`; regenerate in Studio |
+| Unknown model | 400 | `{"type":"invalid_model","message":"Invalid model: ...","code":"1500"}` | Use an exact id such as `mistral-large-latest` |
+| Sent `inputs` to the REST embeddings body | 422 | `"Field required" for input`, plus `"Extra inputs are not permitted" for inputs` | Use `input` for REST and curl, `inputs=` for the SDK |
+| `KeyError: 'MISTRAL_API_KEY'` | n/a | Python raises before any request | The env var is not set in this shell; export it, then rerun |
+| Truncated answer, `finish_reason: length` | 200 | Response is cut off | Raise `max_tokens` or shorten the prompt |
+
+Full error bodies, verbatim:
+
+```json
+// 401, bad key
+{"detail":"Unauthorized"}
+
+// 400, unknown model
+{"object":"error","message":"Invalid model: mistral-nonexistent","type":"invalid_model","param":null,"code":"1500","raw_status_code":400}
+
+// 422, wrong embeddings field (sent "inputs" to REST)
+{"object":"error","message":{"detail":[
+  {"type":"missing","loc":["body","input"],"msg":"Field required"},
+  {"type":"extra_forbidden","loc":["body","inputs"],"msg":"Extra inputs are not permitted"}
+]},"type":"invalid_request_error","raw_status_code":422}
+```
+
+One small bonus from that 422: the echoed request shows `mistral-embed` resolving to `mistral-embed-2312`, so the friendly name is an alias for a dated model.
+
+## What worked, and what surprised me
+
+**What worked.** The Python path really is one import and one call. `pip install mistralai`, set the key, `client.chat.complete(...)`, and you have a response. The quickstart's "under 5 minutes" claim is fair. Errors are OpenAI shaped, so existing tools and habits carry over.
+
+**What surprised me.** Three things:
+
+1. The quickstart shows the code but never shows the output, so I could not confirm I had succeeded without printing the raw response myself. That is a small omission with an outsized effect on a first run.
+2. The live response `id` and `created` do not match the formats in the API reference sample. Not a bug, but a reader who compares them will second-guess a correct result.
+3. `mistral-large-latest` is a moving alias. Reproducible in shape, not in bytes. For a validation log that must be byte stable, pin a dated model id instead of `-latest`.
+
+:::note Reproduce this
+Run `python scripts/validate_api.py` for the SDK path or `bash scripts/validate_api.sh` for curl, with `MISTRAL_API_KEY` set. Both print the responses used to fill this page.
+:::
+
+:::tip Next step
+Continue to [Exercise 4, On-Prem Deployment IA](/exercise-4-onprem-ia).
+:::

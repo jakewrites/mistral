@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mistral Docs — Landing Page Design</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f9f9f8; color: #1a1a18; }
+  .page { max-width: 900px; margin: 0 auto; padding: 2rem; }
+  .util-bar { display: flex; align-items: center; justify-content: flex-end; gap: 20px; padding: 8px 0; border-bottom: 0.5px solid #e0ddd6; }
+  .util-link { font-size: 12px; color: #888; cursor: pointer; }
+  .util-link.highlight { color: #1D9E75; font-weight: 500; }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 0.5px solid #e0ddd6; margin-bottom: 3rem; }
+  .nav-logo { font-size: 15px; font-weight: 600; color: #1a1a18; }
+  .nav-items { display: flex; gap: 24px; }
+  .nav-item { font-size: 13px; color: #555; cursor: pointer; }
+  .nav-item.active { color: #1a1a18; font-weight: 500; }
+  .nav-cta { font-size: 12px; font-weight: 500; background: #1a1a18; color: #fff; padding: 6px 14px; border-radius: 6px; }
+  .hero { margin-bottom: 3rem; }
+  .hero-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #1D9E75; margin-bottom: 12px; }
+  .hero-title { font-size: 36px; font-weight: 500; line-height: 1.2; color: #1a1a18; margin-bottom: 12px; }
+  .hero-sub { font-size: 15px; color: #666; line-height: 1.6; max-width: 560px; }
+  .entry-section { margin-bottom: 3rem; }
+  .section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 16px; }
+  .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .entry-card { background: #fff; border: 0.5px solid #e0ddd6; border-radius: 12px; padding: 20px 22px; cursor: pointer; transition: border-color 0.15s; text-decoration: none; display: block; }
+  .entry-card:hover { border-color: #bbb; }
+  .entry-card.featured { border-color: #1D9E75; border-width: 1px; }
+  .entry-icon { width: 32px; height: 32px; border-radius: 8px; margin-bottom: 12px; font-size: 18px; line-height: 32px; text-align: center; }
+  .entry-title { font-size: 14px; font-weight: 500; color: #1a1a18; margin-bottom: 4px; }
+  .entry-desc { font-size: 12px; color: #888; line-height: 1.5; margin-bottom: 12px; }
+  .entry-link { font-size: 12px; color: #1D9E75; font-weight: 500; }
+  .entry-badge { display: inline-block; font-size: 10px; background: #E1F5EE; color: #085041; padding: 2px 8px; border-radius: 20px; margin-bottom: 8px; }
+  .journey { display: flex; align-items: stretch; margin-bottom: 3rem; border: 0.5px solid #e0ddd6; border-radius: 10px; overflow: hidden; }
+  .journey-step { flex: 1; padding: 14px 12px; border-right: 0.5px solid #e0ddd6; }
+  .journey-step:last-child { border-right: none; }
+  .journey-build { flex: 2; background: #E6F1FB; display: flex; flex-direction: column; border-right: 0.5px solid #e0ddd6; }
+  .build-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #185FA5; padding: 6px 12px 0; opacity: 0.8; }
+  .build-phases { display: flex; flex: 1; }
+  .build-phase { flex: 1; padding: 6px 12px 12px; border-right: 0.5px dashed #B5D4F4; }
+  .build-phase:last-child { border-right: none; }
+  .journey-num { font-size: 10px; color: #bbb; margin-bottom: 2px; }
+  .journey-name { font-size: 13px; font-weight: 500; color: #1a1a18; margin-bottom: 2px; }
+  .journey-desc { font-size: 11px; color: #999; }
+  .build-phase .journey-name { color: #0C447C; }
+  .build-phase .journey-desc { color: #378ADD; opacity: 0.85; }
+  .model-section { margin-bottom: 3rem; }
+  .model-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .model-card { background: #fff; border: 0.5px solid #e0ddd6; border-radius: 10px; padding: 14px 16px; cursor: pointer; }
+  .model-card:hover { border-color: #bbb; }
+  .model-name { font-size: 13px; font-weight: 500; color: #1a1a18; margin-bottom: 2px; }
+  .model-desc { font-size: 11px; color: #999; margin-bottom: 8px; line-height: 1.4; }
+  .model-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .model-tag { font-size: 10px; color: #666; background: #f5f4f0; border-radius: 4px; padding: 2px 6px; }
+  .model-tag.open { color: #3B6D11; background: #EAF3DE; }
+  .qs-row { display: flex; gap: 8px; margin-bottom: 3rem; }
+  .qs-pill { flex: 1; background: #fff; border: 0.5px solid #e0ddd6; border-radius: 8px; padding: 12px 14px; cursor: pointer; }
+  .qs-pill:hover { border-color: #bbb; }
+  .qs-label { font-size: 10px; color: #bbb; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .qs-name { font-size: 12px; font-weight: 500; color: #1a1a18; }
+  .annotation { background: #FAEEDA; border: 0.5px solid #FAC775; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; color: #633806; }
+  .annotation strong { font-weight: 600; }
+  .divider { height: 0.5px; background: #e0ddd6; margin: 2rem 0; }
+  .footnote { font-size: 11px; color: #aaa; font-style: italic; margin-top: 2rem; padding-top: 1rem; border-top: 0.5px solid #e0ddd6; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="annotation"><strong>Design note:</strong> Recommended landing page design — not the current Mistral docs homepage. Amber annotations explain key decisions.</div>
+
+  <div class="util-bar">
+    <span class="util-link highlight">Cookbooks ↗</span>
+    <span class="util-link">API Reference ↗</span>
+    <span class="util-link">Ambassadors</span>
+    <span class="util-link">Community</span>
+  </div>
+
+  <div class="annotation"><strong>Utility bar:</strong> Cookbooks lives here — always one click away — not in the primary nav. Follows Mistral's own existing [Docs | API | Cookbooks | Ambassadors] header convention. Keeps primary nav at 6 items.</div>
+
+  <div class="nav">
+    <div class="nav-logo">✦ Mistral</div>
+    <div class="nav-items">
+      <div class="nav-item active">Get Started</div>
+      <div class="nav-item">Models</div>
+      <div class="nav-item">Build</div>
+      <div class="nav-item">Platform</div>
+      <div class="nav-item">Admin</div>
+      <div class="nav-item">Reference</div>
+    </div>
+    <div class="nav-cta">Try Studio →</div>
+  </div>
+
+  <div class="annotation"><strong>Primary nav — 6 items:</strong> Evaluate & Ship is inside Build (bottom of Build sidebar). Cookbooks is in the utility bar. Six is the cognitive load ceiling.</div>
+
+  <div class="hero">
+    <div class="hero-label">Mistral AI Documentation</div>
+    <div class="hero-title">Build, deploy, and run<br>AI that belongs to you.</div>
+    <div class="hero-sub">Open-weight models. European infrastructure. Full API access. Run on our endpoints or your own.</div>
+  </div>
+
+  <div class="annotation"><strong>Four entry points:</strong> Every user arriving is answering one of four questions. Sovereign deployment is featured — a conversion message for European enterprise and regulated-industry customers choosing Mistral over US-centric alternatives.</div>
+
+  <div class="entry-section">
+    <div class="section-label">Where do you want to start?</div>
+    <div class="entry-grid">
+      <a class="entry-card" href="#">
+        <div class="entry-icon" style="background:#E6F1FB;">⌨️</div>
+        <div class="entry-title">Build with the API</div>
+        <div class="entry-desc">Call Mistral models from your application. First working API request in under 5 minutes.</div>
+        <div class="entry-link">Developer quickstart →</div>
+      </a>
+      <a class="entry-card" href="#">
+        <div class="entry-icon" style="background:#FBEAF0;">💬</div>
+        <div class="entry-title">Use Le Chat</div>
+        <div class="entry-desc">Research, write, analyse data, and build agents — no code required.</div>
+        <div class="entry-link">Le Chat overview →</div>
+      </a>
+      <a class="entry-card" href="#">
+        <div class="entry-icon" style="background:#EAF3DE;">⚙️</div>
+        <div class="entry-title">Set up your organisation</div>
+        <div class="entry-desc">Configure SSO, manage API keys, set usage limits, and control billing across workspaces.</div>
+        <div class="entry-link">Admin quickstart →</div>
+      </a>
+      <a class="entry-card featured" href="#">
+        <div class="entry-badge">Sovereign deployment</div>
+        <div class="entry-icon" style="background:#E1F5EE;">🏗️</div>
+        <div class="entry-title">Deploy on your own infrastructure</div>
+        <div class="entry-desc">Run Mistral models on-premise or in your own cloud. Apache 2.0 open-weights. Full data sovereignty.</div>
+        <div class="entry-link">Self-hosting guide →</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="annotation"><strong>Journey strip:</strong> Build is a double-width block containing two phases — Build and Evaluate & Ship — separated by a dashed internal divider. Makes clear evaluating is part of building, not a separate destination. Three steps total keeps the strip scannable.</div>
+
+  <div class="journey">
+    <div class="journey-step">
+      <div class="journey-num">01</div>
+      <div class="journey-name">Get Started</div>
+      <div class="journey-desc">First success in 15 min</div>
+    </div>
+    <div class="journey-build">
+      <div class="build-label">02 — Build</div>
+      <div class="build-phases">
+        <div class="build-phase">
+          <div class="journey-name">Build</div>
+          <div class="journey-desc">API task guides by capability and use case</div>
+        </div>
+        <div class="build-phase">
+          <div class="journey-name">Evaluate & Ship</div>
+          <div class="journey-desc">Evals, observability, safety gates</div>
+        </div>
+      </div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-num">03</div>
+      <div class="journey-name">Reference</div>
+      <div class="journey-desc">Exact specs & changelogs</div>
+    </div>
+  </div>
+
+  <div class="annotation"><strong>Quickstart row:</strong> Fast secondary entry for users who know their product surface. Cookbooks deliberately omitted — not a quickstart destination.</div>
+
+  <div class="entry-section">
+    <div class="section-label">Quickstarts by product</div>
+    <div class="qs-row">
+      <div class="qs-pill">
+        <div class="qs-label">Le Chat</div>
+        <div class="qs-name">Draft a research report →</div>
+      </div>
+      <div class="qs-pill">
+        <div class="qs-label">Le Chat</div>
+        <div class="qs-name">Build a custom agent →</div>
+      </div>
+      <div class="qs-pill">
+        <div class="qs-label">Developer</div>
+        <div class="qs-name">First API request →</div>
+      </div>
+      <div class="qs-pill">
+        <div class="qs-label">Developer</div>
+        <div class="qs-name">Build a RAG pipeline →</div>
+      </div>
+      <div class="qs-pill">
+        <div class="qs-label">Vibe</div>
+        <div class="qs-name">Install & first prompt →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="model-section">
+    <div class="section-label" style="margin-bottom:16px;">Featured models</div>
+    <div class="model-grid">
+      <div class="model-card">
+        <div class="model-name">Mistral Large 3</div>
+        <div class="model-desc">General purpose multimodal. Frontier performance.</div>
+        <div class="model-tags"><span class="model-tag open">Open weight</span><span class="model-tag">Multimodal</span></div>
+      </div>
+      <div class="model-card">
+        <div class="model-name">Devstral 2</div>
+        <div class="model-desc">Frontier code agent model for software engineering tasks.</div>
+        <div class="model-tags"><span class="model-tag open">Open weight</span><span class="model-tag">Code</span></div>
+      </div>
+      <div class="model-card">
+        <div class="model-name">Magistral Medium 1.2</div>
+        <div class="model-desc">Frontier reasoning with chain-of-thought.</div>
+        <div class="model-tags"><span class="model-tag">Reasoning</span></div>
+      </div>
+      <div class="model-card">
+        <div class="model-name">Voxtral Mini Realtime</div>
+        <div class="model-desc">Live transcription. Optimised for streaming audio.</div>
+        <div class="model-tags"><span class="model-tag open">Open weight</span><span class="model-tag">Audio</span></div>
+      </div>
+      <div class="model-card">
+        <div class="model-name">OCR 3</div>
+        <div class="model-desc">Enterprise document processing and data extraction.</div>
+        <div class="model-tags"><span class="model-tag">Documents</span><span class="model-tag">Premier</span></div>
+      </div>
+      <div class="model-card" style="border-style:dashed;display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;color:#bbb;">
+          <div style="font-size:13px;font-weight:500;margin-bottom:4px;">View all models →</div>
+          <div style="font-size:11px;">65+ models across 10 families</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">Landing page design recommendation — Mistral AI Information Architecture project, April 2026.</div>
+</div>
+</body>
+</html>

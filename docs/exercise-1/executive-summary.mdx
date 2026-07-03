@@ -1,0 +1,56 @@
+---
+slug: /exercise-1/executive-summary
+title: 'Exercise 1 · Executive Summary'
+sidebar_label: Executive Summary
+description: A documentation strategy proposal for docs.mistral.ai, backed by a 420-page audit.
+---
+
+import StatGrid from '@site/src/components/StatGrid';
+
+# Executive Summary
+
+<p className="doc-meta">Exercise 1 · Documentation audit and strategy proposal · Scope: the 420 live pages of docs.mistral.ai</p>
+
+The Mistral documentation is technically rich and, in places, excellent. Its problem is not content quality, it is **organisation**. The site is structured around how Mistral's products and teams are named, not around what a developer is trying to do. The result is duplication, misfiled guides, and a top navigation that asks the reader to understand Mistral's internal taxonomy before they can find a task.
+
+This proposal presents an audit of all 420 live documentation pages and a prioritised plan to reorganise them around **user intent**, orientation, building, evaluating, and shipping, while leaving the underlying content largely intact.
+
+<StatGrid
+  stats={[
+    {value: '420', label: 'Live pages audited', sub: 'Every page given a proposed placement'},
+    {value: '46', label: 'Pages flagged for action', sub: '26 move · 11 redirect · 9 duplicate'},
+    {value: '6', label: 'Top-level sections', sub: 'Same count, re-cut around user intent'},
+    {value: '0', label: 'Pages requiring a rewrite', sub: 'This is a structural change, not a content one'},
+  ]}
+/>
+
+## The core finding
+
+> The current top navigation reflects how Mistral is organised internally, by product surface (Le Chat, Studio, Developers, Admin), rather than how a developer works: orient, build, evaluate, ship. Wherever the two disagree, the reader pays the cost.
+
+Three structural problems follow from this:
+
+1. **The same task exists at several URLs.** Quickstarts are duplicated across `getting-started/`, `developers/`, and `le-chat/` path prefixes, 9 exact duplicates and 11 redirect-worthy variants. This dilutes search, splits inbound links, and makes "which one is canonical?" a question the reader has to answer.
+2. **Guides are filed under the thing they mention, not the job they serve.** Prompt engineering, sampling, and deployment guides live under **Models**, because they mention models, but a reader looking for them is *building*, not comparing model cards. 26 pages are misfiled this way.
+3. **`Developers` is a junk drawer.** It is a top-level section defined by audience rather than task, so it accumulates anything vaguely developer-shaped and duplicates content that already has a home.
+
+## The proposal in one sentence
+
+Replace the audience- and product-named top navigation with a six-section, intent-based architecture, **Get Started · Models · Build · Platform · Admin · Reference**, with Cookbooks and the API Reference as utility links, and move each of the 420 pages to the section that matches the reader's job rather than the product's name.
+
+## Why this is low-risk
+
+This is an **information-architecture** change, not a content one. No page needs to be rewritten to execute it; pages move, duplicates collapse into canonical URLs with redirects, and a handful of guides change parent. That is what makes it worth doing now: high navigational payoff, bounded engineering effort, and no new writing debt.
+
+## What follows
+
+- **[Review Methodology](/exercise-1/methodology)**, how the audit was conducted and how findings were classified.
+- **[Strengths](/exercise-1/strengths)**, what is already working and must be preserved.
+- **[Audit Findings](/exercise-1/audit-findings)**, the evidence, explorable in full.
+- **[Recommendations](/exercise-1/recommendations)**, six recommendations, each tied to specific findings.
+- **[Prioritisation](/exercise-1/prioritisation)**, sequencing by impact and effort.
+- **[Example Rewrite](/exercise-1/example-rewrite)**, one page taken from current to proposed.
+
+:::tip Next step
+Read the [Review Methodology](/exercise-1/methodology) to see how the evidence was gathered, or jump straight to the [Audit Findings](/exercise-1/audit-findings) to explore it.
+:::

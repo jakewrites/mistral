@@ -1,0 +1,97 @@
+---
+slug: /exercise-1/example-rewrite
+title: 'Exercise 1 · Example Rewrite'
+sidebar_label: Example Rewrite
+description: One real page taken from its current state to the proposed state.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Example Rewrite
+
+The recommendations describe the change in aggregate. This page makes it concrete on **one real page**, the Prompt Engineering guide, so the effect is visible at the level a reader actually experiences.
+
+The audit flags this page as [`MOVE`](/exercise-1/audit-findings): it lives under **Models** but serves a **builder**. Below is the page's framing before and after the change. Note that the *body* of the guide is unchanged, this is a placement and framing rewrite, not a content rewrite.
+
+## Placement
+
+<Tabs>
+<TabItem value="before" label="Before" default>
+
+```text
+URL:        docs.mistral.ai/models/best-practices/prompt-engineering
+Breadcrumb: Models  /  Best Practices  /  Prompt Engineering
+Sidebar:    Models
+            ├─ Overview & Selection Guide
+            ├─ Best Practices
+            │   ├─ Prompt Engineering   ← here
+            │   └─ Sampling
+            └─ Model cards…
+```
+
+**Problem:** a reader looking for prompting guidance is *building*, not choosing a model. Filing it under Models means they either don't find it, or find it only after wading through model cards.
+
+</TabItem>
+<TabItem value="after" label="After">
+
+```text
+URL:        docs.mistral.ai/build/chat-completions/prompting
+Breadcrumb: Build  /  Chat & Completions  /  Prompting
+Sidebar:    Build
+            ├─ Chat & Completions
+            │   ├─ Prompting           ← here
+            │   ├─ Sampling
+            │   └─ Structured output
+            ├─ Knowledge & RAG
+            └─ Agents & Tools
+Redirect:   old URL returns 301 and points to the new URL
+```
+
+**Fix:** the guide now sits under the verb that describes the reader's goal. Model cards stay in Models as specs; guidance lives in Build. The old URL 301-redirects, so no inbound link breaks.
+
+</TabItem>
+</Tabs>
+
+## Opening rewrite
+
+The move is the substance; while re-parenting the page, a small framing edit makes it earn its new home. This is the kind of light-touch rewrite the restructure invites, not required, but cheap and worth it.
+
+<Tabs>
+<TabItem value="before-copy" label="Before" default>
+
+> # Prompt Engineering
+>
+> This guide covers best practices for prompting Mistral models. Prompts can be used to steer the behaviour of a model. There are many techniques that can be used to improve the quality of the responses you get from a model.
+
+**What's weak:** no audience, no outcome, no orientation. "Can be used to" twice. The reader doesn't learn what they'll be able to do or how this relates to the surrounding Build tasks.
+
+</TabItem>
+<TabItem value="after-copy" label="After">
+
+> # Prompting
+>
+> Prompting is how you steer a Mistral model's behaviour without changing the model itself. This guide gives you a working set of techniques, system prompts, few-shot examples, and output constraints, and shows when to reach for each.
+>
+> **You'll be able to:** write prompts that produce consistent, parseable output for a real task.
+>
+> **Prerequisites:** you can already make a [chat completion request](/exercise-3-api-validation). **Next:** once your prompts are stable, constrain their shape with [structured output](/exercise-1/recommendations#r2).
+
+**What changed:** a one-line definition orients the reader; a concrete outcome sets expectations; prerequisites and next steps wire the page into the Build journey instead of leaving it an island. Title shortened to the task word ("Prompting") now that the section provides the context.
+
+</TabItem>
+</Tabs>
+
+## Why this is the pattern, not the exception
+
+Every `MOVE` in the audit follows the same shape:
+
+1. **Re-parent** the page under the task it serves (the structural change).
+2. **301-redirect** the old URL (no broken links).
+3. Optionally, **tighten the opening** to name the audience, the outcome, and the neighbours (the framing change).
+
+Steps 1 and 2 are mechanical and scriptable. Step 3 is the writing, and it is where a technical writer adds the value the restructure creates room for.
+
+:::tip Next step
+See the underlying data and how to reproduce it in the [Exercise 1 Appendix](/exercise-1/appendix).
+:::

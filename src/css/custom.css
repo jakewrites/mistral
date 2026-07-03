@@ -1,0 +1,112 @@
+/**
+ * Global theme.
+ * Minimal, documentation-first. One warm accent (Mistral-adjacent amber),
+ * otherwise a restrained neutral palette. Light and dark both first-class.
+ */
+
+:root {
+  --ifm-color-primary: #b8501f;
+  --ifm-color-primary-dark: #a6481c;
+  --ifm-color-primary-darker: #9c441a;
+  --ifm-color-primary-darkest: #813816;
+  --ifm-color-primary-light: #ca5822;
+  --ifm-color-primary-lighter: #d45f27;
+  --ifm-color-primary-lightest: #dd7b4b;
+
+  --ifm-font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  --ifm-font-family-monospace: ui-monospace, SFMono-Regular, 'SF Mono', Menlo,
+    Consolas, 'Liberation Mono', monospace;
+
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.65;
+  --ifm-heading-font-weight: 650;
+  --ifm-h1-font-size: 2.15rem;
+
+  --ifm-code-font-size: 87%;
+  --ifm-navbar-height: 3.75rem;
+  --ifm-container-width-xl: 1180px;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.07);
+
+  /* Surface tokens used by custom components */
+  --surface-border: #e6e6e3;
+  --surface-muted: #f7f6f4;
+  --surface-card: #ffffff;
+  --text-subtle: #57534e;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #f0865a;
+  --ifm-color-primary-dark: #ec6e39;
+  --ifm-color-primary-darker: #ea6228;
+  --ifm-color-primary-darkest: #c94d18;
+  --ifm-color-primary-light: #f39e7b;
+  --ifm-color-primary-lighter: #f5aa8c;
+  --ifm-color-primary-lightest: #f9c8b6;
+
+  --ifm-background-color: #16130f;
+  --ifm-background-surface-color: #1d1a15;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.08);
+
+  --surface-border: #34302a;
+  --surface-muted: #201d18;
+  --surface-card: #1d1a15;
+  --text-subtle: #b6afa5;
+}
+
+/* Tighten heading rhythm for a documentation feel */
+.markdown h2 {
+  margin-top: 2.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--surface-border);
+  --ifm-h2-font-size: 1.5rem;
+}
+.markdown h3 {
+  margin-top: 1.8rem;
+  --ifm-h3-font-size: 1.2rem;
+}
+
+/* Lead paragraph pattern: first paragraph after an h1 reads as a standfirst */
+article .markdown > p:first-of-type {
+  font-size: 1.05rem;
+  color: var(--text-subtle);
+}
+
+/* Tables: quieter, evidence-grade */
+.markdown table {
+  display: table;
+  width: 100%;
+  font-size: 0.9rem;
+}
+.markdown table thead tr {
+  background: var(--surface-muted);
+}
+.markdown table th,
+.markdown table td {
+  border-color: var(--surface-border);
+}
+
+/* Navbar: flatten */
+.navbar {
+  border-bottom: 1px solid var(--surface-border);
+  box-shadow: none;
+}
+
+/* Admonitions: slightly calmer */
+.theme-admonition {
+  border-radius: 8px;
+}
+
+/* Code blocks: subtle border */
+.theme-code-block {
+  box-shadow: none;
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+}
+
+/* Reusable helper for muted metadata lines */
+.doc-meta {
+  color: var(--text-subtle);
+  font-size: 0.9rem;
+}

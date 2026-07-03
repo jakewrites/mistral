@@ -1,0 +1,67 @@
+---
+slug: /appendix
+title: Appendix, Source Artefacts
+sidebar_label: Appendix
+description: The original information-architecture redesign artefacts that back Exercises 1 and 4.
+---
+
+import ArtifactEmbed from '@site/src/components/ArtifactEmbed';
+import DownloadLink from '@site/src/components/DownloadLink';
+
+# Appendix, Source Artefacts
+
+Before this assessment I produced an independent information-architecture redesign of the Mistral documentation. Those artefacts are the **evidence base for [Exercise 1](/exercise-1/executive-summary)** and the **reference material for [Exercise 4](/exercise-4-onprem-ia)**. They are preserved here in their original form so they can be inspected directly, not just summarised.
+
+:::note Why this is in the submission
+The assessment asks for visible judgement. These artefacts *are* the judgement, a full 420-page placement decision, a navigable IA, and a landing-page design, made before I knew how they would be presented. Embedding the originals lets a reviewer check the reasoning at source.
+:::
+
+## 1. Information Architecture tree
+
+The complete proposed IA, navigable to leaf level: six intent-based top-level sections, per-section page counts, and a one-line "writer rule" for each. This is the target structure that the [Exercise 1 recommendations](/exercise-1/recommendations) move pages into.
+
+<ArtifactEmbed
+  src="/artifacts/ia-tree.html"
+  title="Mistral Docs, Information Architecture Tree"
+  caption="420 pages · 6 top-level sections · Evaluate & Ship folded into Build · Cookbooks as a utility link"
+  height={620}
+/>
+
+## 2. Landing-page design
+
+The proposed documentation home: a six-item primary nav, four persona entry points (with the **sovereign / on-prem deployment path featured**), a journey strip, and a featured-models grid. The persona entry points are the mechanism behind [R6](/exercise-1/recommendations#r6), personas as entry points, not top-level sections.
+
+<ArtifactEmbed
+  src="/artifacts/landing-page-design.html"
+  title="Mistral Docs, Landing Page Design"
+  caption="Persona entry points route into shared, task-based content"
+  height={620}
+/>
+
+## 3. Recommendations document
+
+The written strategy behind the redesign, executive summary, current-state analysis, seven named design principles, the recommended IA with page counts, a use-case taxonomy for Build, and the landing-page rationale.
+
+<DownloadLink href="/artifacts/ia-recommendations.docx">Download the IA recommendations document (DOCX)</DownloadLink>
+
+Its central theses, quoted directly:
+
+> "The primary navigation should reflect how users work, orientation, building, evaluating, shipping, not how Mistral's teams are organised internally."
+
+> "The current Developers section is a junk drawer."
+
+Both are load-bearing in [Exercise 1](/exercise-1/executive-summary): the first is the basis of [R4](/exercise-1/recommendations#r4), the second of [R3](/exercise-1/recommendations#r3).
+
+## 4. The audit data set
+
+The 420-row placement audit is explorable on the [Audit Findings](/exercise-1/audit-findings) page and downloadable below.
+
+<DownloadLink href="/artifacts/documentation-audit.csv">Download the audit (CSV, 420 rows)</DownloadLink>
+
+:::caution Two versions exist, by design
+An earlier draft of the audit kept `Deploy`, `Le Chat`, and `Evaluate & Ship` as separate top-level sections and let `Reference` bloat to 176 pages. The canonical version used throughout collapses those into the six-section model and holds Reference to 49. The delta is documented in the [Exercise 1 Appendix](/exercise-1/appendix#a-note-on-versioning) as evidence for [R5](/exercise-1/recommendations#r5).
+:::
+
+:::tip Related
+Read [About this submission](/about) for how these artefacts were made and where AI assisted.
+:::

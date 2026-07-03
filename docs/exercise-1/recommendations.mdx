@@ -1,0 +1,121 @@
+---
+slug: /exercise-1/recommendations
+title: 'Exercise 1 · Recommendations'
+sidebar_label: Recommendations
+description: Six evidence-based recommendations, each tied to specific audit findings.
+---
+
+import Recommendation from '@site/src/components/Recommendation';
+
+# Recommendations
+
+Six recommendations follow. Each uses the same template, **Observation, Evidence, Recommendation, Expected impact, Effort, Priority**, so they can be compared and sequenced on equal terms. Every one cites the [Audit Findings](/exercise-1/audit-findings) that motivated it, and the [Prioritisation](/exercise-1/prioritisation) page turns them into a sequence.
+
+<Recommendation
+  id="R1"
+  title="Consolidate duplicate quickstart URLs to one canonical path each"
+  priority="P1"
+  impact="High"
+  effort="Low"
+  observation="Individual quickstarts are reachable from two or three URLs at once, across the getting-started/, developers/, and le-chat/ path prefixes."
+  recommendation={<>Pick one canonical URL per quickstart (the <code>getting-started/quickstarts/&#123;persona&#125;/…</code> form), and 301-redirect every other path to it. No content changes, only URL consolidation.</>}
+  expectedImpact="Search results stop competing with themselves; inbound links and SEO authority consolidate; readers no longer have to judge which copy is current. Removes 20 of the 46 flagged pages.">
+
+  9 exact duplicates and 11 redirect candidates, for example:
+
+  | Keep (canonical) | Collapse into it |
+  |---|---|
+  | `/getting-started/quickstarts/developer/first-api-request` | `/developers/quickstarts/first-api-request` |
+  | `/getting-started/quickstarts/le-chat/draft-research-report` | `/le-chat/quickstarts/draft-research-report` |
+  | `/admin/quickstarts/configure-sso` | `/getting-started/quickstarts/admin/configure-sso` |
+
+</Recommendation>
+
+<Recommendation
+  id="R2"
+  title="Re-file guides by the task they serve, not the noun they mention"
+  priority="P1"
+  impact="High"
+  effort="Medium"
+  observation="Guidance a builder needs is filed under Models because it mentions models. Prompt engineering, sampling, and deployment are things you do, not properties of a model."
+  recommendation={<>Move prompting and sampling guides into <strong>Build / Chat &amp; Completions</strong>; move the 14 deployment pages into <strong>Models / Self-hosting</strong>; move the glossary into <strong>Reference</strong>. Keep model cards as specs-only. Codify the rule: <em>if a page teaches a task, it is not a model property.</em></>}
+  expectedImpact="Builders find building guidance under a building verb. Models becomes a clean catalogue again. Establishes a reusable content-model rule that prevents the misfiling from recurring.">
+
+  26 pages are misfiled this way. Representative:
+
+  | Current | Proposed | Action |
+  |---|---|---|
+  | `/models/best-practices/prompt-engineering` | Build / Chat & Completions / Prompting | `MOVE` |
+  | `/models/best-practices/sampling` | Build / Chat & Completions / Sampling | `MOVE` |
+  | `/models/deployment/*` (14) | Models / Self-hosting | `MOVE` |
+
+</Recommendation>
+
+<Recommendation
+  id="R3"
+  title="Dissolve the audience-named Developers section into task sections"
+  priority="P1"
+  impact="High"
+  effort="Medium"
+  observation="Developers is a top-level section defined by audience, not task. With no single job, it accumulates anything developer-shaped and re-hosts quickstarts that already live under Getting Started."
+  recommendation="Redistribute Developers content into the task-based sections (Get Started, Build, Reference) and remove the section from the top navigation. Express the developer persona as an entry point on the landing page, not as structure."
+  expectedImpact="Eliminates the structural cause of duplication: an audience section can never enforce a content model, so it will always compete with the task sections. Removing it stops the drift at the source.">
+
+  The `Developers` section exists in the live top navigation today and overlaps directly with `Get Started / Quickstarts / Developer`. Audience-named containers have no admission rule, so there is no principled answer to "does this page belong here?"
+
+</Recommendation>
+
+<Recommendation
+  id="R4"
+  title="Reorganise the top navigation into six intent-based sections"
+  priority="P1"
+  impact="High"
+  effort="Medium"
+  observation="The top navigation encodes product surfaces and audiences (Le Chat, Studio, Developers, Admin) rather than user goals. Readers must know which Mistral surface owns their task before they can navigate to it."
+  recommendation={<>Adopt six top-level sections that mirror how developers work: <strong>Get Started · Models · Build · Platform · Admin · Reference</strong>. Fold Evaluate &amp; Ship into Build. Keep Cookbooks and the API Reference as utility links, not sections. Hold the top nav to six items as a hard constraint.</>}
+  expectedImpact="Navigation answers 'what do I want to do?' instead of 'which team made this?'. This is the umbrella change that makes R1-R3 coherent rather than piecemeal, and it caps top-nav cognitive load.">
+
+  This is the architecture the other recommendations move pages *into*. The full target tree, all 420 pages placed, is the [Information Architecture redesign](/appendix) embedded in the Appendix.
+
+  | Section | Job it answers | Pages |
+  |---|---|---|
+  | Get Started | "Orient me and get me a first success" | 32 |
+  | Models | "Which model, and what are its specs?" | 85 |
+  | Build | "Help me build this capability" (incl. Evaluate & Ship) | 79 |
+  | Platform | "Run it on the platform" | 29 |
+  | Admin | "Set up my organisation" | 17 |
+  | Reference | "Give me the exact source of truth" | 49 |
+
+</Recommendation>
+
+<Recommendation
+  id="R5"
+  title="Make Reference the exact source of truth, and nothing more"
+  priority="P2"
+  impact="Medium"
+  effort="Medium"
+  observation="Reference currently mixes true reference material (specs, parameters, definitions) with task guidance that teaches. A reader in 'look it up' mode and a reader in 'teach me' mode need different surfaces."
+  recommendation="Restrict Reference to definitions, specifications, parameters, and error codes. Move any page that teaches a task out to Build or Get Started. Apply one admission test: 'is this something you look up, or something you learn?'"
+  expectedImpact="Reference becomes trustworthy as a scan-and-confirm surface; task content stops being buried in it. Prevents Reference from re-bloating into the catch-all it was in the earlier IA draft (176 pages) rather than the focused 49 proposed here.">
+
+  The earlier IA draft had Reference at 176 pages precisely because it absorbed teaching content. The canonical model cuts it to 49 by holding the "look up vs. learn" line.
+
+</Recommendation>
+
+<Recommendation
+  id="R6"
+  title="Express personas as landing-page entry points, keep Cookbooks as a utility link"
+  priority="P2"
+  impact="Medium"
+  effort="Low"
+  observation="The docs correctly recognise that Le Chat users, developers, and admins arrive with different goals, but currently express this as separate top-level sections, which fragments shared content."
+  recommendation="Route personas from a landing page ('Build with the API', 'Use Le Chat', 'Set up your organisation', 'Deploy on your own infrastructure') into shared task-based content. Keep the 127 Cookbooks as a utility link, distinct from the section hierarchy."
+  expectedImpact="Preserves the persona-awareness that already works, without paying for it in duplication. The landing page carries the routing; the sections stay single-sourced.">
+
+  This keeps the *intent* behind the current structure while removing its cost. The proposed landing page, including the featured 'Deploy on your own infrastructure' sovereign path, is embedded in the [Appendix](/appendix).
+
+</Recommendation>
+
+:::tip Next step
+See how these six are sequenced by impact and effort in [Prioritisation](/exercise-1/prioritisation).
+:::

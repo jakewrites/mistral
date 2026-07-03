@@ -1,0 +1,6 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Assessment mark">
+  <rect x="1" y="1" width="30" height="30" rx="7" fill="#b8501f"/>
+  <rect x="7" y="9" width="4" height="14" rx="1.2" fill="#fff"/>
+  <rect x="14" y="9" width="4" height="14" rx="1.2" fill="#fff" opacity="0.85"/>
+  <rect x="21" y="9" width="4" height="14" rx="1.2" fill="#fff" opacity="0.6"/>
+</svg>
