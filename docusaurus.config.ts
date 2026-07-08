@@ -17,9 +17,11 @@ const config: Config = {
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
-  // The Recommendation component exposes #r1..#r6 as ids on its <section>.
+  // The Recommendation component exposes #r1..#r3 as ids on its <section>.
   // These resolve at runtime (verified in the built HTML) but the static anchor
   // checker only sees Markdown heading anchors, so it cannot validate them.
+  // scripts/check-anchors.mjs restores that guardrail: it asserts every
+  // recommendations#rN link in docs/ has a matching Recommendation id.
   onBrokenAnchors: 'ignore',
 
   markdown: {

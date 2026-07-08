@@ -11,6 +11,10 @@ import Recommendation from '@site/src/components/Recommendation';
 
 Three recommendations follow. Each uses the same template (Observation, Evidence, Recommendation, Expected impact, Effort, Priority) so they can be compared on equal terms. Every one cites the finding in [The Audit](/exercise-1/audit-findings) that motivated it. The [Sequencing](#sequencing) section below turns them into a phased plan, [Considerations](#considerations) raises a cross-cutting strategy question the recommendations surface (documenting self-hosted products), and [After it Ships](/exercise-1/after-it-ships) names the post-ship signal for each and the operating model behind them. The calls the proposal leaves open are named honestly on [Open Questions](/exercise-1/open-questions).
 
+:::note The three at a glance
+**R1** re-cuts the top nav into six intent-based sections and dissolves the audience-named `Developers` section. **R2** restricts Reference to true look-ups and gathers the scattered ones into it. **R3** fixes the machine-readable fundamentals (`robots.txt`, content negotiation, a working `llms.txt`). R1 is the umbrella; R2 is its guardrail against drift, and R3 is the same canonical-URL discipline applied to the agent reader.
+:::
+
 <Recommendation
   id="R1"
   title="Reorganise the top navigation into six intent-based sections"
@@ -87,7 +91,7 @@ Three recommendations follow. Each uses the same template (Observation, Evidence
   effort="Low"
   observation="Agents are now a documentation audience alongside humans: Mistral's own models, third-party coding assistants, and Le Chat itself fetch and cite these docs. Yet docs.mistral.ai scores just 7/100 on isitagentready.com: no content negotiation, no robots.txt, and broken links in its own llms.txt."
   recommendation={<>Fix the agent-readable fundamentals: config and build work, not new content. Publish a <code>robots.txt</code> on <code>docs.mistral.ai</code> (it currently 404s) with explicit AI-bot rules and a <code>Sitemap:</code> directive, add content negotiation so the per-page Markdown that <code>llms.txt</code> advertises resolves instead of 404ing, and regenerate <code>llms.txt</code> so it stops pointing at dead links. <a href="#r1">R1</a>'s task-named canonical URLs are the same fix machine-side, because agents cite canonical URLs and duplicates split authority for bots exactly as for humans.</>}
-  expectedImpact="Agents can discover, crawl, and cite the docs against stable canonical URLs instead of hitting 404s, and the machine index stops advertising dead links. For an AI company this is also optics: an 'is it agent ready' probe is exactly the kind of check that circulates, and today it returns 7/100.">
+  expectedImpact="Agents can discover, crawl, and cite the docs against stable canonical URLs instead of hitting 404s, and the machine index stops advertising dead links. A third-party readiness probe scores the site 7/100 today, which is a directional smoke alarm rather than the case for the work; the case is that these are low-cost fixes that remove real failures for a real and growing audience.">
 
   Verified live against `docs.mistral.ai` on 5 July 2026. The public score is **7/100** on [isitagentready.com](https://isitagentready.com/docs.mistral.ai), and the reasons that matter for a docs site are concrete and real:
 

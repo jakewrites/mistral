@@ -21,7 +21,7 @@ The five exercises:
 │   ├── exercise-1/              # Centrepiece: the documentation strategy proposal
 │   │   ├── executive-summary.mdx
 │   │   ├── audit-findings.mdx   # How I audited, what's strong, the three findings
-│   │   ├── recommendations.mdx  # Five recommendations (templated component)
+│   │   ├── recommendations.mdx  # Three recommendations (templated component)
 │   │   ├── example-rewrite.mdx
 │   │   └── open-questions.md    # The calls the proposal deliberately leaves open
 │   ├── exercise-2/              # Vector embeddings, Version A & B

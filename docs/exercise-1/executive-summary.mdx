@@ -27,7 +27,7 @@ This is the developer's walk, the one I could test end to end. It is one of thre
   stats={[
     {value: '6', label: 'Pages flagged for action', sub: '2 move · 4 redirect'},
     {value: '6', label: 'Top-level sections', sub: 'Re-cut around user intent, plus a managed/self-hosted surface axis'},
-    {value: '0', label: 'Rewrites the restructure needs', sub: 'It ships as moves and redirects, not rewrites'},
+    {value: '0', label: 'Rewrites the nav re-cut needs', sub: 'The six-section move ships as redirects; the surface axis is a separate, larger effort'},
   ]}
 />
 
@@ -36,6 +36,8 @@ This is the developer's walk, the one I could test end to end. It is one of thre
 The brief is deliberately open, so the first judgement is where to aim. I aimed at information architecture because findability is the binding constraint on a platform expanding this fast: new and renamed surfaces (Le Chat became Vibe, La Plateforme became Studio, on-prem grew), a widening model lineup, and readers who now range from non-technical Vibe users to infrastructure engineers. Reorganising is also the cheapest and most time-sensitive fix: it raises findability without rewriting content, and structure only gets more expensive to change as the site grows.
 
 The brief asks for a score. Mine is **findability: 4/10**, and it is deliberately scoped. Findability is the axis I actually assessed, and the one worth acting on. I did not audit content quality (I didn't test every page, verify code, or hunt for gaps), so I won't put a number on what I didn't measure. Findability gates everything: the best page is worthless if the reader can't reach it. This proposal moves that number without touching content.
+
+I won't hide behind the scope, though. On the one path I did run end to end, the Getting Started and API quickstart validated in [Exercise 3](/exercise-3-api-validation), the writing is accurate and the code works, but the content has gaps a review would close: the quickstart never shows a successful response, so a first-timer can't recognise one; the API reference's sample response doesn't match live output (the `id` format and the `created` type both differ); the SDK Clients page assumes the key is already set and drops the reader into a `KeyError`; and the error glossary is both minimal and unreachable from the page where the error happens. Directionally that is good content with thin edges, not a broken corpus. I'm calling it a read rather than a score because it covers one journey, not the whole site, and because content quality is the axis findability unlocks: none of those gaps reach a reader who can't find the page.
 
 ## On the rewrite
 
@@ -63,13 +65,15 @@ The substantive change is dissolving `Developers`: its guidance goes to **Build*
 
 In journey terms: building finally gets a **Build** front door, and Studio drops back to the console tool it is, documented in Products.
 
-## Why this is low-risk
+## How big a change this really is
 
-Execution is bounded: the Developers content re-homes into Get Started, Build, and Reference, four redundant pages gain redirects, and two look-up pages change parent. High navigational payoff, low engineering effort.
+The core nav re-cut is bounded: the Developers content re-homes into Get Started, Build, and Reference, four redundant pages gain redirects, and two look-up pages change parent. No page bodies are rewritten to move them, which is what makes the re-cut cheap relative to its navigational payoff.
+
+Two costs I won't paper over. First, every moved URL is one that external links, search rankings, and agent citations point at today. A 301 preserves most of that equity but not all, so the redirects have to be complete and permanent, and I'd stage them and watch Search Console rather than ship them in a single cut. Second, the managed/self-hosted surface axis ([R1](/exercise-1/recommendations#r1)) is not a redirect job at all: single-sourcing shared pages into two rendered trees and version-gating the self-hosted one is a content-engineering programme measured in quarters, not the days the redirects take. The [Sequencing](/exercise-1/recommendations#sequencing) plan splits the two on purpose, so the cheap win ships first and the expensive part is scoped honestly rather than hidden inside a "low effort" label.
 
 ## Also built for the agent reader
 
-Mistral's docs now have a machine audience: its own models, third-party coding assistants, and Vibe itself fetch and cite these pages, and an *"is it agent ready?"* probe is exactly the kind of check that circulates about an AI company. Right now that probe returns **7/100**: no `robots.txt` (it 404s), no content negotiation (the per-page Markdown `llms.txt` advertises 404s), and broken links inside `llms.txt` itself. These are config and build fixes. No new content is needed. It is the same canonical-URL discipline the human recommendations need, one audience further out. The evidence and the fixes are in [R3](/exercise-1/recommendations#r3).
+Mistral's docs now have a machine audience: its own models, third-party coding assistants, and Vibe itself fetch and cite these pages. Today they hit walls a human wouldn't. `docs.mistral.ai` has no `robots.txt` (it 404s), no content negotiation (the per-page Markdown that `llms.txt` advertises 404s), and broken links inside `llms.txt` itself. A third-party readiness probe scores the site **7/100**, which is a useful smoke alarm but not the argument. The argument is that these are cheap config and build fixes with no new content, and they are the same canonical-URL discipline the human recommendations need, one audience further out. The evidence and the fixes are in [R3](/exercise-1/recommendations#r3).
 
 ## What's in the rest of this exercise
 

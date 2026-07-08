@@ -217,6 +217,23 @@ The Python path really is one import and one call: `pip install mistralai`, set 
 
 One thing to flag beyond the gaps above: `mistral-large-latest` is a moving alias, reproducible in shape but not in bytes, because Mistral rolls it forward to each new model version. For a validation log you want to reproduce later, pin a dated model id (e.g. `mistral-large-2411`) instead of `-latest` so the model can't change under you, and set `temperature: 0` to remove sampling drift too.
 
+## What I would validate next
+
+I deliberately scoped this to the two calls a new developer makes first, chat and embeddings, because that is the path the quickstart sells and the fastest way to catch the gaps above. The surfaces below are where the harder documentation failures tend to hide, and each is where I would point the next validation run:
+
+| Surface | What I'd check | Why it's where docs break |
+|---|---|---|
+| Streaming (`stream=True`) | That the SSE chunk shape and the final `usage` frame match the docs, and that a mid-stream error is documented | Streaming responses are a different shape from the blocking one, and docs often show only the blocking example |
+| Function / tool calling | Whether `tool_calls` arguments arrive as a JSON string or an object, and how a malformed tool response is surfaced | The request/response round trip has more moving parts than any single-call example shows |
+| Structured output (JSON mode / schema) | That the documented schema is actually enforced, and what happens when the model can't satisfy it | "Guaranteed JSON" is a claim worth testing, not asserting |
+| Agents / Workflows | A minimal end-to-end run, since [Exercise 5](/exercise-5-workflows-enablement) sells Workflows on durability | The claims an SE repeats to a customer should be the ones that are validated, not assumed |
+
+This is the honest edge of the exercise: I validated the front door thoroughly and named the rooms I didn't open, rather than pad the page with calls I hadn't run.
+
+:::note On screenshots, and why this page is text
+The brief invites screenshots or code output. I chose verbatim text over terminal screenshots on purpose: a pasted screenshot of JSON can't be trusted or re-run, whereas every block on this page is reproducible from the harness below against a live key. The output *is* the evidence, and it's copy-pasteable rather than an image. Where a screenshot genuinely adds signal (the Studio key-creation screen a first-timer needs), that belongs in the quickstart itself, which is one of the gaps in the table above.
+:::
+
 :::note Reproduce this
 Run `python scripts/validate_api.py` for the SDK path or `bash scripts/validate_api.sh` for curl, with `MISTRAL_API_KEY` set. Both print the responses used to fill this page.
 :::
