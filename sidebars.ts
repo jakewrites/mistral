@@ -2,25 +2,23 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 /**
  * A single hand-authored sidebar. The order is the intended reading order:
- * orientation to the centrepiece audit to the four supporting exercises  to 
- * shared appendix to meta.
+ * orientation to the centrepiece audit to the four supporting exercises to
+ * the shared appendix.
  */
 const sidebars: SidebarsConfig = {
   assessmentSidebar: [
     'overview',
     {
       type: 'category',
-      label: 'Exercise 1: Documentation Audit',
+      label: 'Exercise 1: Critique & Rewrite',
       collapsed: false,
       items: [
         'exercise-1/executive-summary',
-        'exercise-1/methodology',
-        'exercise-1/strengths',
         'exercise-1/audit-findings',
         'exercise-1/recommendations',
-        'exercise-1/prioritisation',
         'exercise-1/example-rewrite',
-        'exercise-1/appendix',
+        'exercise-1/after-it-ships',
+        'exercise-1/open-questions',
       ],
     },
     {
@@ -37,7 +35,6 @@ const sidebars: SidebarsConfig = {
     'exercise-4-onprem-ia',
     'exercise-5-workflows-enablement',
     'appendix',
-    'about',
   ],
 };
 

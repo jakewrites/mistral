@@ -2,96 +2,200 @@
 slug: /exercise-1/example-rewrite
 title: 'Exercise 1 · Example Rewrite'
 sidebar_label: Example Rewrite
-description: One real page taken from its current state to the proposed state.
+description: One real page, the live platform overview, rewritten in full against the live copy.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import {PageMock, JobCard, FaqMock} from '@site/src/components/PageMock';
 
 # Example Rewrite
 
-The recommendations describe the change in aggregate. This page makes it concrete on **one real page**, the Prompt Engineering guide, so the effect is visible at the level a reader actually experiences.
+This is the rewrite the brief asks for: the live [platform overview](https://docs.mistral.ai/getting-started/platform-overview), rewritten in full. It is the page where [the audited walk](/exercise-1/audit-findings#how-i-audited) broke, and it carries the core problem in miniature: it orients by product where the reader arrives with a job. This is the *page-level* rewrite; the docs home page, which greets you with the same product cards, gets its redesign in the [Appendix landing-page design](/appendix#2-landing-page-design). The facts are the live page's, captured 6 July 2026. The frame is new, plus one addition the audit argues for.
 
-The audit flags this page as [`MOVE`](/exercise-1/audit-findings): it lives under **Models** but serves a **builder**. Below is the page's framing before and after the change. Note that the *body* of the guide is unchanged, this is a placement and framing rewrite, not a content rewrite.
-
-## Placement
-
-<Tabs>
-<TabItem value="before" label="Before" default>
-
-```text
-URL:        docs.mistral.ai/models/best-practices/prompt-engineering
-Breadcrumb: Models  /  Best Practices  /  Prompt Engineering
-Sidebar:    Models
-            ├─ Overview & Selection Guide
-            ├─ Best Practices
-            │   ├─ Prompt Engineering   ← here
-            │   └─ Sampling
-            └─ Model cards…
-```
-
-**Problem:** a reader looking for prompting guidance is *building*, not choosing a model. Filing it under Models means they either don't find it, or find it only after wading through model cards.
-
-</TabItem>
-<TabItem value="after" label="After">
-
-```text
-URL:        docs.mistral.ai/build/chat-completions/prompting
-Breadcrumb: Build  /  Chat & Completions  /  Prompting
-Sidebar:    Build
-            ├─ Chat & Completions
-            │   ├─ Prompting           ← here
-            │   ├─ Sampling
-            │   └─ Structured output
-            ├─ Knowledge & RAG
-            └─ Agents & Tools
-Redirect:   old URL returns 301 and points to the new URL
-```
-
-**Fix:** the guide now sits under the verb that describes the reader's goal. Model cards stay in Models as specs; guidance lives in Build. The old URL 301-redirects, so no inbound link breaks.
-
-</TabItem>
-</Tabs>
-
-## Opening rewrite
-
-The move is the substance; while re-parenting the page, a small framing edit makes it earn its new home. This is the kind of light-touch rewrite the restructure invites, not required, but cheap and worth it.
+## One page, before and after
 
 <Tabs>
 <TabItem value="before-copy" label="Before" default>
 
-> # Prompt Engineering
->
-> This guide covers best practices for prompting Mistral models. Prompts can be used to steer the behaviour of a model. There are many techniques that can be used to improve the quality of the responses you get from a model.
+The live page, reconstructed complete and verbatim, down to the link labels and the collapsed common questions.
 
-**What's weak:** no audience, no outcome, no orientation. "Can be used to" twice. The reader doesn't learn what they'll be able to do or how this relates to the surrounding Build tasks.
+<PageMock
+  variant="live"
+  title="Platform overview"
+  badge="docs.mistral.ai · 6 July 2026"
+  lede="Mistral AI has three products. Pick the one that matches what you want to do.">
+  <JobCard
+    callout={
+      <>
+        Tip: For a side-by-side feature and plan comparison across products,
+        see the pricing page.
+      </>
+    }>
+    <ul>
+      <li>
+        <strong>Vibe</strong>: the unified agent for productivity and coding.
+        Chat with it on the web or mobile, or run it in your terminal and
+        editor.
+      </li>
+      <li>
+        <strong>Studio</strong>: the developer console and Mistral API.
+        Generate keys, prototype in the Playground, build durable workflows,
+        and call text, audio, and OCR models from a single SDK.
+      </li>
+      <li>
+        <strong>Admin</strong>: the control plane for organization setup,
+        billing, SSO, workspaces, and access policies.
+      </li>
+    </ul>
+  </JobCard>
+  <JobCard
+    title="Vibe"
+    links={[
+      'Open Vibe Work',
+      'Get started with Vibe Work',
+      'Get started with Vibe Code',
+      'Choose Chat, Work, or Code',
+    ]}>
+    Vibe is Mistral's unified agent. It runs in three modes, each shaped for a
+    different kind of task:
+    <ul>
+      <li>
+        <strong>Work</strong>: productivity mode in the Vibe web and mobile
+        apps. Describe an outcome, Work picks the tools, runs the steps, and
+        shows live todos. Use it for research, document analysis, data
+        exploration, and scheduled tasks.
+      </li>
+      <li>
+        <strong>Code</strong>: developer mode as a CLI, a VS Code extension,
+        or remote Vibe Code Web sessions. Vibe Code reads your files, edits
+        code, runs commands, and opens pull requests under your supervision.
+      </li>
+      <li>
+        <strong>Chat</strong>: turn-based mode for quick conversations and
+        legacy features migrated from Le Chat (Agents, Think mode, Deep
+        Research, Code Interpreter, Memories).
+      </li>
+    </ul>
+  </JobCard>
+  <JobCard
+    title="Studio"
+    links={[
+      'Open Studio',
+      'Studio documentation',
+      'Studio quickstarts',
+      'Developer quickstarts',
+    ]}>
+    Studio is the developer console. Generate API keys, test prompts in the
+    Playground, build and deploy agents, run evaluations, and monitor usage.
+    Everything you need to ship AI applications on the Mistral API.
+  </JobCard>
+  <JobCard
+    title="Admin"
+    links={['Open Admin', 'Admin documentation', 'Admin quickstarts']}>
+    Admin is the control plane for IT, security, and finance teams. Manage
+    your organization's account, members, roles, Workspaces, billing, SSO, and
+    security policies.
+  </JobCard>
+  <FaqMock
+    title="Common questions"
+    questions={[
+      "What's the difference between Vibe and Studio?",
+      "What's the difference between Vibe Work and Vibe Code?",
+      'I was using Le Chat. What changes for me?',
+      'Who should have the Billing role?',
+      'Are Chat agents and Vibe Work Skills the same thing?',
+    ]}
+  />
+</PageMock>
+
+**What's weak.** The writing is competent line by line. The frame is the problem.
+
+- The opening promises intent and delivers inventory. "Pick the one that matches what you want to do" is followed by what Mistral makes, so the reader must already know what "Vibe", "Studio", and "Admin" mean to choose. The page knows this: its own Common questions open with "What's the difference between Vibe and Studio?", the exact confusion the page just created.
+- The developer's job never appears. "Build an AI application" is on no card. A developer has to decode that a "developer console" named Studio is where building starts, which is precisely the API-key gate that stalled [the audited walk](/exercise-1/audit-findings#how-i-audited).
+- The least oriented reader is served last. Someone arriving from Le Chat, with no idea what happened to their product, finds "What changes for me?" collapsed at the bottom of the page, below three cards that never mention it.
+- The orientation page speaks insider vocabulary: "durable workflows", "control plane", "OCR models", to the one audience guaranteed not to know the platform yet.
+- Self-hosting does not exist here. Mistral ships open-weight models you can run on your own hardware and a self-hosted Vibe / Le Chat Enterprise, and sovereignty is its differentiator, yet the page that orients every new reader never says you can run Mistral yourself. This is the discoverability gap the [Considerations section](/exercise-1/recommendations#considerations) documents, at its most visible.
 
 </TabItem>
 <TabItem value="after-copy" label="After">
 
-> # Prompting
->
-> Prompting is how you steer a Mistral model's behaviour without changing the model itself. This guide gives you a working set of techniques, system prompts, few-shot examples, and output constraints, and shows when to reach for each.
->
-> **You'll be able to:** write prompts that produce consistent, parseable output for a real task.
->
-> **Prerequisites:** you can already make a [chat completion request](/exercise-3-api-validation). **Next:** once your prompts are stable, constrain their shape with [structured output](/exercise-1/recommendations#r2).
+The rewritten page, rendered as it would ship:
 
-**What changed:** a one-line definition orients the reader; a concrete outcome sets expectations; prerequisites and next steps wire the page into the Build journey instead of leaving it an island. Title shortened to the task word ("Prompting") now that the section provides the context.
+<PageMock
+  variant="live"
+  title="Platform overview"
+  badge="Proposed"
+  lede="Start from your job. The product names will follow."
+  footer="Comparing features and plans across products? See the pricing page.">
+  <JobCard
+    title="I want AI to do work for me"
+    links={['Open Vibe', 'Choose between Chat, Work, and Code']}
+    callout={
+      <>
+        Coming from Le Chat? Vibe is its new name. Your account, plan, and
+        conversations carry over, and the features you used (Agents, Think
+        mode, Deep Research, Memories) live on in Vibe's Chat mode.
+      </>
+    }>
+    That is <strong>Vibe</strong>. Chat with it, hand it a document or a
+    research question, let it run multi-step tasks, or have it write code
+    alongside you, on the web, on mobile, or in your terminal and editor.
+    There is nothing to install and no key to create: sign in and start.
+  </JobCard>
+  <JobCard
+    title="I want to build an AI application"
+    links={['Create an API key', 'Send your first request', 'Explore the API']}>
+    That is the <strong>Mistral API</strong>, and your first stop is{' '}
+    <strong>Studio</strong>, the console where the developer basics live.
+    Create an API key, try prompts in the Playground, then call text, audio,
+    and OCR models from a single SDK. Your first request takes about five
+    minutes.
+  </JobCard>
+  <JobCard
+    title="I run Mistral for a team"
+    links={['Open Admin', 'Set up your organization']}>
+    That is <strong>Admin</strong>. Your organization's account, members and
+    roles, Workspaces, billing, SSO, and security policies live there, in one
+    place, separate from the products your team uses day to day.
+  </JobCard>
+  <JobCard
+    title="I want to run Mistral on my own infrastructure"
+    links={[
+      'Should I self-host?',
+      'Deploy open-weight models',
+      'Contact us about sovereign deployment',
+    ]}>
+    You can, two ways. Deploy Mistral's <strong>open-weight models</strong> on
+    your own stack (vLLM, TensorRT-LLM), or run <strong>Vibe Enterprise</strong>{' '}
+    self-hosted or in your private cloud for sovereign deployments. Start with
+    whether self-hosting is the right call for you. The deep runbooks come with
+    an enterprise engagement.
+  </JobCard>
+</PageMock>
+
+**What changed:** the same destinations and the same facts behind a different first question, plus one card the live page is missing.
+
+- The cards are named by the reader's job (do work for me, build an application, run it for a team, run it myself), and each product name arrives as the answer to a job rather than a name to decode. That dissolves the top common question outright: "What's the difference between Vibe and Studio?" becomes two different cards a reader self-selects between.
+- The developer's path is explicit and starts with the two actions [the walk](/exercise-1/audit-findings#how-i-audited) showed matter: create a key, send a request. Studio is introduced as the console those happen in, which is [R1](/exercise-1/recommendations#r1)'s Studio rule applied in one sentence.
+- The Le Chat reader is caught in the first card instead of a collapsed accordion at the bottom.
+- Three of the five common questions dissolve into the framing. The two that remain ("Who should have the Billing role?", "Are Chat agents and Vibe Work Skills the same thing?") are Admin and Vibe questions, and move to the pages that own those concepts.
+- The fourth card is the one addition, and it is argued for elsewhere in this proposal rather than invented here: the [Considerations section](/exercise-1/recommendations#considerations) requires the *whether* of self-hosting to be public even when the *how* is gated (what it is, when to choose it, the contact path), and the [appendix landing-page design](/appendix#2-landing-page-design) features the sovereign / on-prem entry point among its four for the same reason. Self-hosting cuts across products, which is exactly why it needs a job card rather than a product card.
+- Insider vocabulary ("durable workflows", "control plane") defers to the product pages, where it lands on a reader who has already chosen. (The link labels are illustrative: in production they point at the live quickstarts and consoles.)
 
 </TabItem>
 </Tabs>
 
 ## Why this is the pattern, not the exception
 
-Every `MOVE` in the audit follows the same shape:
+Every page the restructure re-homes, the Developers content above all, follows the same shape:
 
 1. **Re-parent** the page under the task it serves (the structural change).
 2. **301-redirect** the old URL (no broken links).
 3. Optionally, **tighten the opening** to name the audience, the outcome, and the neighbours (the framing change).
 
-Steps 1 and 2 are mechanical and scriptable. Step 3 is the writing, and it is where a technical writer adds the value the restructure creates room for.
+Steps 1 and 2 are mechanical and scriptable. Step 3 is the writing, and it is where a technical writer adds the value the restructure creates room for. A rewrite as deep as the one above is reserved for the few pages every reader passes through, the overview first among them. For the long tail, the opening carries most of the value, which is why step 3 stops there.
 
-:::tip Next step
-See the underlying data and how to reproduce it in the [Exercise 1 Appendix](/exercise-1/appendix).
+:::tip Next
+See the calls this proposal leaves open in [Open Questions](/exercise-1/open-questions), then continue to [Exercise 2](/exercise-2/overview).
 :::

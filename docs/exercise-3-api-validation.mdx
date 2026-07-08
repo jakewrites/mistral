@@ -106,10 +106,6 @@ This is the verbatim JSON the API returned, lightly reformatted for reading. Not
 
 The Python SDK returns the same content, with `response.usage` printing as `prompt_tokens=14 completion_tokens=23 total_tokens=37`.
 
-:::note Screenshot placeholder: Studio API key screen
-A screenshot of the Mistral Studio "API keys" page belongs here, key value redacted, showing where the credential in `MISTRAL_API_KEY` comes from. That is the one step a first-timer is most likely to miss.
-:::
-
 ## Test 2: Embeddings
 
 **Endpoint:** `POST https://api.mistral.ai/v1/embeddings` · **Model:** `mistral-embed`
@@ -179,7 +175,7 @@ Reading and running the Getting Started content as a first-time user, here is wh
 | 2 | The API reference sample response does not match live output | The reference shows an `id` like `cmpl-e5cc70bb...` and `created` as the string `"1702256327"`. Live, the `id` is bare hex (`0c46aba5...`) and `created` is an integer (`1783096753`). | Regenerate the sample from a real call so field formats are accurate. |
 | 3 | The SDK Clients page assumes the key is set but never explains it | It gives `pip install mistralai` and code that reads `os.environ["MISTRAL_API_KEY"]`, but nothing about obtaining or setting the key. A reader who starts there hits a `KeyError` on the first run. | Add a two-line key setup block, or link prominently to the quickstart step that covers it. |
 | 4 | The embeddings field name differs between REST and SDK, and this is not called out | REST expects `input` (singular). The Python SDK expects `inputs` (plural). Copying one into the other fails. | State both field names side by side on the embeddings page. |
-| 5 | Error status codes are not documented, and they are not what you would guess | An unknown model returns HTTP 400 (`invalid_model`, code 1500), not a 422 validation error. A bad key returns `{"detail":"Unauthorized"}` with 401. | Add a short error table with real status codes and bodies. |
+| 5 | The error glossary exists, but you can't reach it when you hit an error, and the codes aren't what you'd guess | An unknown model returns HTTP 400 (`invalid_model`, code 1500), not the 422 you would guess; a bad key returns 401 `{"detail":"Unauthorized"}`. Mistral *does* document errors in an [error glossary](https://docs.mistral.ai/resources/error-glossary), but it sits in Resources, the quickstart never links to it, and it is minimal (status codes and the JSON shape, not the per-scenario codes). A first-timer who hits an error has no path from the quickstart to it. | Link the glossary from the quickstart and endpoint pages, and note the non-obvious codes (400 for an invalid model) inline. |
 
 :::note What this exercise is really testing
 Points 1 to 3 are ordinary content gaps that are cheap to close and that every new user hits. Point 4 is the kind of cross-surface inconsistency that only shows up when you actually run both paths. Point 5 is why "validate, do not assume" matters: I guessed 422 for a bad model and the API returned 400.
@@ -215,15 +211,11 @@ Full error bodies, verbatim:
 
 One small bonus from that 422: the echoed request shows `mistral-embed` resolving to `mistral-embed-2312`, so the friendly name is an alias for a dated model.
 
-## What worked, and what surprised me
+## What worked
 
-**What worked.** The Python path really is one import and one call. `pip install mistralai`, set the key, `client.chat.complete(...)`, and you have a response. The quickstart's "under 5 minutes" claim is fair. Errors are OpenAI shaped, so existing tools and habits carry over.
+The Python path really is one import and one call: `pip install mistralai`, set the key, `client.chat.complete(...)`, and you have a response. The quickstart's "under 5 minutes" claim is fair, and errors are OpenAI-shaped, so existing tools and habits carry over.
 
-**What surprised me.** Three things:
-
-1. The quickstart shows the code but never shows the output, so I could not confirm I had succeeded without printing the raw response myself. That is a small omission with an outsized effect on a first run.
-2. The live response `id` and `created` do not match the formats in the API reference sample. Not a bug, but a reader who compares them will second-guess a correct result.
-3. `mistral-large-latest` is a moving alias. Reproducible in shape, not in bytes. For a validation log that must be byte stable, pin a dated model id instead of `-latest`.
+One thing to flag beyond the gaps above: `mistral-large-latest` is a moving alias, reproducible in shape but not in bytes, because Mistral rolls it forward to each new model version. For a validation log you want to reproduce later, pin a dated model id (e.g. `mistral-large-2411`) instead of `-latest` so the model can't change under you, and set `temperature: 0` to remove sampling drift too.
 
 :::note Reproduce this
 Run `python scripts/validate_api.py` for the SDK path or `bash scripts/validate_api.sh` for curl, with `MISTRAL_API_KEY` set. Both print the responses used to fill this page.

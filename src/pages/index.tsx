@@ -14,9 +14,9 @@ interface ExerciseCard {
 const exercises: ExerciseCard[] = [
   {
     n: '01',
-    title: 'Documentation Audit & Strategy',
+    title: 'Documentation Critique & Rewrite',
     blurb:
-      'A documentation strategy proposal for the Mistral docs: methodology, evidence from a 420-page audit, and prioritised recommendations.',
+      'A documentation strategy proposal for the Mistral docs: a full-site structural placement review, three findings, and five prioritised recommendations.',
     to: '/exercise-1/executive-summary',
     tag: 'Centrepiece',
   },
@@ -24,7 +24,7 @@ const exercises: ExerciseCard[] = [
     n: '02',
     title: 'Explaining Vector Embeddings',
     blurb:
-      'One concept, two audiences, a plain-language version for developers new to AI, and a rigorous version for experienced engineers.',
+      'One concept, two reader jobs: a plain-language version to understand embeddings, and a rigorous version to design a retrieval system with them.',
     to: '/exercise-2/overview',
     tag: 'Developer education',
   },
@@ -83,7 +83,7 @@ export default function Home(): ReactNode {
             <Link className={styles.primaryBtn} to="/exercise-1/executive-summary">
               Start with the audit
             </Link>
-            <Link className={styles.secondaryBtn} to="/about">
+            <Link className={styles.secondaryBtn} to="/overview">
               How to read this submission
             </Link>
           </div>
@@ -115,7 +115,7 @@ export default function Home(): ReactNode {
             <strong>A note on AI assistance.</strong> This assessment allows AI tools, and
             I used them. The judgement, what to audit, how to prioritise, which
             trade-offs to surface, is mine, and the{' '}
-            <Link to="/about">About this submission</Link> page is explicit about where
+            <Link to="/overview#where-ai-assisted">Overview</Link> is explicit about where
             each was applied.
           </p>
         </section>

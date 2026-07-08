@@ -95,7 +95,7 @@ const config: Config = {
           items: [
             {label: 'Home', to: '/'},
             {label: 'Exercise 1, Audit', to: '/exercise-1/executive-summary'},
-            {label: 'About this submission', to: '/about'},
+            {label: 'Overview', to: '/overview'},
           ],
         },
         {

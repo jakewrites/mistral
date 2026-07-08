@@ -6,7 +6,7 @@ My submission for the Mistral AI **Senior Technical Writer / Developer Educator*
 
 The five exercises:
 
-1. **Documentation Audit & Strategy**, a strategy proposal backed by a real audit of the 420 live pages on `docs.mistral.ai` (the centrepiece).
+1. **Documentation Critique & Rewrite**, a strategy proposal backed by a full-site structural placement review of `docs.mistral.ai` (the centrepiece).
 2. **Explaining Vector Embeddings**, one concept in two versions: new-to-AI and experienced-engineer.
 3. **Validating the Mistral API**, runnable Python + curl walkthroughs with expected vs. observed output and field notes.
 4. **On-Prem Deployment IA**, an information-architecture *design* (not the prose), modelled on Kubernetes and Terraform.
@@ -17,32 +17,26 @@ The five exercises:
 ```
 .
 ├── docs/                        # All exercise content (Markdown / MDX)
-│   ├── overview.md              # Orientation: how to read the submission
-│   ├── exercise-1/              # Centrepiece: the documentation audit
+│   ├── overview.md              # Orientation, AI-use disclosure, where the judgement is
+│   ├── exercise-1/              # Centrepiece: the documentation strategy proposal
 │   │   ├── executive-summary.mdx
-│   │   ├── methodology.md
-│   │   ├── strengths.md
-│   │   ├── audit-findings.mdx   # Themed findings + interactive audit explorer
-│   │   ├── recommendations.mdx  # Six recommendations (templated component)
-│   │   ├── prioritisation.md
+│   │   ├── audit-findings.mdx   # How I audited, what's strong, the three findings
+│   │   ├── recommendations.mdx  # Five recommendations (templated component)
 │   │   ├── example-rewrite.mdx
-│   │   └── appendix.mdx
+│   │   └── open-questions.md    # The calls the proposal deliberately leaves open
 │   ├── exercise-2/              # Vector embeddings, Version A & B
 │   ├── exercise-3-api-validation.mdx
 │   ├── exercise-4-onprem-ia.md
 │   ├── exercise-5-workflows-enablement.md
-│   ├── appendix.mdx             # Source IA artefacts (embedded)
-│   └── about.md                 # AI-use disclosure + where the judgement is
+│   └── appendix.mdx             # Source IA artefacts (embedded)
 ├── src/
 │   ├── components/              # Reusable React components
 │   │   ├── Recommendation/      # Observation/Evidence/Recommendation/Impact/Effort/Priority card
-│   │   ├── AuditExplorer/       # Filterable, searchable view of all 420 audited pages
 │   │   ├── ArtifactEmbed/       # Iframe wrapper for the original HTML artefacts
 │   │   └── StatGrid/            # Headline stat tiles
-│   ├── data/                    # audit.json + audit-summary.json (generated from the CSV)
 │   ├── pages/index.tsx          # Custom landing page
 │   └── css/custom.css           # Minimal theme (one accent; light + dark)
-├── static/artifacts/           # Original IA artefacts: audit CSV, IA tree, landing page, docx
+├── static/artifacts/           # Original IA artefacts: IA tree, landing-page design
 ├── scripts/                    # Live API validation harness (Exercise 3)
 │   ├── validate_api.py
 │   └── validate_api.sh
@@ -86,10 +80,10 @@ bash   scripts/validate_api.sh       # curl version
 ## Why the assessment is structured this way
 
 - **One site, not five documents.** The role is about documentation *systems*. Presenting the work as a navigable site lets information architecture, progressive disclosure, and cross-linking be demonstrated in situ.
-- **Exercise 1 is weighted as the centrepiece.** It is structured as a documentation-strategy proposal and backed by real evidence, a 420-row placement audit that is explorable in the browser and downloadable. Every recommendation cites the findings that motivated it.
-- **Reusable components encode the templates.** The recommendation card and audit explorer make the structure consistent and the evidence interactive, rather than static tables.
+- **Exercise 1 is weighted as the centrepiece.** It is structured as a documentation-strategy proposal and backed by real evidence: a full-site structural placement review of the live docs. Every recommendation cites the findings that motivated it.
+- **Reusable components encode the templates.** The recommendation card, stat grid, and embedded IA artefacts make the structure consistent and the evidence inspectable, rather than static tables.
 - **Technical claims are verified, not asserted.** Factual claims were cross-checked against live `docs.mistral.ai`; Exercise 3 ships a runnable harness.
-- **AI use is disclosed.** See [`docs/about.md`](docs/about.md) for exactly where AI assisted and where the judgement is mine.
+- **AI use is disclosed.** See [`docs/overview.md`](docs/overview.md) for exactly where AI assisted and where the judgement is mine.
 
 ## Colophon
 

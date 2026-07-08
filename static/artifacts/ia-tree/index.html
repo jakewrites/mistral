@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mistral Docs — Information Architecture Tree</title>
+<title>Mistral Docs · Information Architecture Tree</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f9f9f8; color: #1a1a18; padding: 2rem; }
@@ -49,13 +49,13 @@
 </head>
 <body>
 
-<h1>Mistral Docs — Information Architecture</h1>
-<p class="subtitle">420 pages · 7 top-level sections · Evaluate & Ship inside Build · Cookbooks via utility link</p>
+<h1>Mistral Docs · Information Architecture</h1>
+<p class="subtitle">6 primary sections + Cookbooks via utility link · Evaluate & Ship inside Build</p>
 
 <div class="journey-bar">
   <div class="journey-step js-gs">Get Started<span class="jlabel">orientation</span></div>
   <div class="journey-build">
-    <div class="build-top">02 — Build</div>
+    <div class="build-top">02 · Build</div>
     <div class="build-phases">
       <div class="build-phase"><span class="jname">Build</span><span class="jlabel">api task guides</span></div>
       <div class="build-phase"><span class="jname">Evaluate & Ship</span><span class="jlabel">quality gates</span></div>
@@ -64,23 +64,23 @@
   <div class="journey-step js-r">Reference<span class="jlabel">exact specs</span></div>
 </div>
 
-<div class="util-note"><strong>Cookbooks</strong> — accessible via utility link in the doc header, not a primary nav item. Primary discovery is inline from Build pages (1–3 related examples per page). Keeps primary nav at 6 items.</div>
+<div class="util-note"><strong>Cookbooks</strong>: accessible via utility link in the doc header, not a primary nav item. Primary discovery is inline from Build pages (1–3 related examples per page). Keeps primary nav at 6 items.</div>
 
 <div id="ia-sections"></div>
 
 <script>
 const data = [
   {
-    id:'s1', color:'#1D9E75', title:'Get Started', type:'Developer journey — step 1', pages:32,
+    id:'s1', color:'#1D9E75', title:'Get Started', type:'Developer journey · step 1', pages:18,
     groups:[{ items:[
-      { label:'Quickstarts', chips:['Le Chat × 3','Developer × 3','Studio × 2','Mistral Vibe × 2','Admin × 3'] },
-      { label:'Choose your path', chips:['Le Chat vs Studio vs Admin'] },
+      { label:'Quickstarts', chips:['Vibe Work × 3','Developer × 3','Studio × 2','Vibe Code × 2','Admin × 3'] },
+      { label:'Choose your path', chips:['Vibe vs Studio vs Admin'] },
       { label:'Install an SDK', chips:['Python','TypeScript','Other languages'] },
     ]}],
-    note:'Rule: only content needed in the first 15 minutes. Model selection does not belong here — the quickstart provides the model name.'
+    note:'Rule: only content needed in the first 15 minutes. Model selection does not belong here; the quickstart provides the model name.'
   },
   {
-    id:'s2', color:'#BA7517', title:'Models', type:'Cross-cutting — selection, catalog & self-hosting', pages:85,
+    id:'s2', color:'#BA7517', title:'Models', type:'Cross-cutting · selection, catalog & self-hosting', pages:81,
     groups:[
       { label:'Selection & guidance', items:[
         { label:'Overview & selection guide', chips:['Use-case to recommendation matrix'] },
@@ -102,29 +102,29 @@ const data = [
         { label:'Overview', chips:['Serverless vs dedicated vs self-hosted decision guide'] },
         { label:'Cloud providers', chips:['Amazon Bedrock','Azure AI Foundry','IBM WatsonX','Outscale','Snowflake Cortex','Google Vertex AI'] },
         { label:'Local deployment', chips:['vLLM','TGI','TensorRT-LLM','SkyPilot','Cerebrium','Cloudflare Workers AI'] },
-        { label:'Workflows in production', chips:['Deployments','Concurrency','Rate limiting','Execution context','Error codes','Reset workflow'] },
       ]},
     ],
-    note:'Rule: model cards and selection guidance in the catalog. Self-hosting is clearly separated — only for users not using the Mistral API endpoint.'
+    note:'Rule: model cards and selection guidance in the catalog. Self-hosting is clearly separated, only for users not using the Mistral API endpoint.'
   },
   {
-    id:'s3', color:'#185FA5', title:'Build', type:'Developer journey — step 2 (includes Evaluate & Ship)', pages:79,
+    id:'s3', color:'#185FA5', title:'Build', type:'Developer journey · step 2 (includes Evaluate & Ship)', pages:80,
     groups:[
-      { label:'Building phase — 70 pages', items:[
-        { label:'Chat & completions', chips:['Overview','Prompting','Sampling'] },
+      { label:'Building phase · 70 pages', items:[
+        { label:'Chat & completions', chips:['Overview'] },
         { label:'Vision', chips:['Send images','Multimodal prompts'] },
         { label:'Reasoning', chips:['Overview','Native reasoning','Adjustable reasoning'] },
         { label:'Citations & references', chips:['Grounded responses','Source attribution'] },
         { label:'Function calling', chips:['Define tools','Handle model-initiated calls'] },
         { label:'Structured outputs', chips:['Overview','Custom schema','JSON mode'] },
         { label:'Advanced completions', chips:['Predicted outputs'] },
-        { label:'Audio', chips:['Speech to text — offline','Speech to text — realtime','Text to speech','Voices'] },
+        { label:'Audio', chips:['Speech to text (offline)','Speech to text (realtime)','Text to speech','Voices'] },
         { label:'Document processing', chips:['Overview','OCR','Annotations','Document Q&A'] },
         { label:'Knowledge & RAG', chips:['RAG quickstart','Text embeddings','Code embeddings','Libraries API','Connectors × 4'] },
         { label:'Agents', chips:['Introduction','Conversations & memory','Tools: web search / code / image gen / function calling','Handoffs'] },
-        { label:'Workflows — getting started', chips:['Introduction','Installation','First workflow','Core concepts × 6'] },
-        { label:'Workflows — building', chips:['Workflows','Activities × 3','Events','Sub-workflows','Durable agents','Scheduling','Streaming','Conditions','Exceptions','+ more'] },
-        { label:'Workflows — interacting', chips:['Conversational workflows','Queries','Signals','Updates'] },
+        { label:'Workflows · getting started', chips:['Introduction','Installation','First workflow','Core concepts × 6'] },
+        { label:'Workflows · building', chips:['Workflows','Activities × 3','Events','Sub-workflows','Durable agents','Scheduling','Streaming','Conditions','Exceptions','+ more'] },
+        { label:'Workflows · interacting', chips:['Conversational workflows','Queries','Signals','Updates'] },
+        { label:'Workflows · production', chips:['Deployments','Concurrency','Rate limiting','Execution context','Error codes','Reset workflow'] },
         { label:'Batch processing', chips:['Async large-scale inference','50% cost reduction'] },
       ]},
       { evaluatePhase:true, items:[
@@ -132,29 +132,25 @@ const data = [
         { label:'Safety & moderation', chips:['Overview','Per-request moderation'] },
       ]},
     ],
-    note:'Rule — building phase: "how do I accomplish X via the API?" Rule — evaluate & ship: "is this ready to ship?" Both belong in Build. Evaluate & Ship sits at the bottom of the Build sidebar.'
+    note:'Rule, building phase: "how do I accomplish X via the API?" Rule, evaluate & ship: "is this ready to ship?" Both belong in Build. Evaluate & Ship sits at the bottom of the Build sidebar.'
   },
   {
-    id:'s4', color:'#72243E', title:'Platform', type:'Product surfaces — Le Chat, Studio & Vibe', pages:29,
+    id:'s4', color:'#72243E', title:'Products', type:'Product surfaces · Vibe & Studio', pages:22,
     groups:[
-      { label:'Le Chat', items:[
-        { label:'Overview', chips:[] },
-        { label:'Conversation', chips:['Chat','Think mode','Voice mode','Flash answers'] },
-        { label:'Content creation', chips:['Canvas','Code interpreter','Image generation'] },
-        { label:'Research & analysis', chips:['Files upload','Open URL','Web search','Deep research'] },
-        { label:'Knowledge & integrations', chips:['Custom instructions','Projects','Agents (no-code)','Memories','Libraries','Connectors','Knowledge connectors','MCP connectors'] },
+      { label:'Vibe · unified agent', items:[
+        { label:'Overview', chips:['Choose Chat, Work, or Code'] },
+        { label:'Work', chips:['Tasks','Voice mode','Deep research','Files & web search','Projects & connectors'] },
+        { label:'Chat', chips:['Conversation','Think mode','Agents (no-code)','Memories','Canvas','Code interpreter','Image generation'] },
+        { label:'Code', chips:['Overview','Install & setup','CLI','Agents & skills','Offline / local','FIM API'] },
       ]},
       { label:'Studio Console', items:[
         { label:'Overview', chips:['Playground','Key management','Usage monitoring'] },
       ]},
-      { label:'Mistral Vibe', items:[
-        { label:'CLI coding agent', chips:['Overview','Install','Quickstart','Configuration','Agents & skills','Offline / local','FIM API'] },
-      ]},
     ],
-    note:'Rule: product UI surfaces only. Studio API task guides live in Build. Admin manages these surfaces — it is not one of them.'
+    note:'Rule: product UI surfaces only. Studio API task guides live in Build. Admin manages these surfaces; it is not one of them.'
   },
   {
-    id:'s5', color:'#3B6D11', title:'Admin', type:'Role-based — org administrators', pages:17,
+    id:'s5', color:'#3B6D11', title:'Admin', type:'Role-based · org administrators', pages:13,
     groups:[{ items:[
       { label:'Quickstarts', chips:['Create organisation','Configure SSO','Manage workspaces & API keys'] },
       { label:'Security & access', chips:['Admin panel','Organisations & workspaces','SSO','Email domain auth','API keys','Audit logs','Admin API','Privacy'] },
@@ -163,11 +159,11 @@ const data = [
     note:'Rule: primary reader is an IT administrator or billing administrator.'
   },
   {
-    id:'s6', color:'#534AB7', title:'Reference', type:'Exact technical source of truth', pages:49,
+    id:'s6', color:'#534AB7', title:'Reference', type:'Exact technical source of truth', pages:39,
     groups:[{ items:[
-      { label:'API — stable endpoints', chips:['Chat','Agents','Audio × 3','Batch','Classifiers','Embeddings','Files','FIM','Fine-tuning','Models','OCR'] },
-      { label:'API — beta endpoints', chips:['Agents','Conversations','Libraries × 3','Observability × 6','Workflows × 7'] },
-      { label:'API — deprecated endpoints', chips:['Agents (deprecated)','Fine-tuning (deprecated)'] },
+      { label:'API · stable endpoints', chips:['Chat','Agents','Audio × 3','Batch','Classifiers','Embeddings','Files','FIM','Fine-tuning','Models','OCR'] },
+      { label:'API · beta endpoints', chips:['Agents','Conversations','Libraries × 3','Observability × 6','Workflows × 7'] },
+      { label:'API · deprecated endpoints', chips:['Agents (deprecated)','Fine-tuning (deprecated)'] },
       { label:'SDKs', chips:['Python','TypeScript','Other languages'] },
       { label:'Errors & troubleshooting', chips:['Error glossary','Known limitations'] },
       { label:'Operations', chips:['Observability integrations','Migration guides','Changelog','Glossary','Robots & crawlers'] },
@@ -176,12 +172,12 @@ const data = [
     note:'Rule: exact technical specification only. Never explanatory prose. If a page needs 3+ paragraphs of explanation, that explanation belongs in Build.'
   },
   {
-    id:'s7', color:'#1D9E75', title:'Cookbooks', type:'Via utility header link — not primary nav', pages:127,
+    id:'s7', color:'#1D9E75', title:'Cookbooks', type:'Via utility header link, not primary nav', pages:125,
     groups:[
       { label:'Concept deep dives', items:[
         { label:'Concepts', chips:['Prompting','Quantization × 6','Sampling × 4','Tokenization × 8'] },
       ]},
-      { label:'Task examples — mirrors Build taxonomy', items:[
+      { label:'Task examples · mirrors Build taxonomy', items:[
         { label:'Chat & completions', chips:['Prompting capabilities','Prefix use cases'] },
         { label:'RAG & knowledge', chips:['Basic RAG','Reference RAG','Search engine','RAG via function calling'] },
         { label:'Embeddings', chips:['Embeddings','Code embeddings','Dequantization'] },
@@ -191,7 +187,7 @@ const data = [
         { label:'Safety & moderation', chips:['Moderation explored','System-level guardrails'] },
         { label:'Evaluation', chips:['Evaluation','RAG evaluation'] },
         { label:'Fine-tuning & data', chips:['Fine-tune API','Pixtral fine-tune','Synthetic data + fine-tune','Data generation'] },
-        { label:'Le Chat & MCP', chips:['Le Chat custom MCP server'] },
+        { label:'Vibe & MCP', chips:['Vibe custom MCP server'] },
       ]},
       { label:'Third-party integrations', items:[
         { label:'Frameworks', chips:['LangChain × 2','LlamaIndex × 13','PydanticAI','MetaGPT','CamelAI × 2','Microsoft AutoGen'] },
@@ -220,12 +216,12 @@ function renderSection(s) {
     if (g.selfHosting) {
       const lbl = document.createElement('div');
       lbl.className = 'self-hosting-divider';
-      lbl.textContent = '↓ Self-hosting — for users not using the Mistral API endpoint';
+      lbl.textContent = '↓ Self-hosting: for users not using the Mistral API endpoint';
       body.appendChild(lbl);
     } else if (g.evaluatePhase) {
       const lbl = document.createElement('div');
       lbl.className = 'evaluate-divider';
-      lbl.textContent = '↓ Evaluate & Ship — final phase of Build (bottom of Build sidebar)';
+      lbl.textContent = '↓ Evaluate & Ship: final phase of Build (bottom of Build sidebar)';
       body.appendChild(lbl);
     } else if (g.label) {
       const lbl = document.createElement('div');

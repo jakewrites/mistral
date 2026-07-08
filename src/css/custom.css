@@ -110,3 +110,14 @@ article .markdown > p:first-of-type {
   color: var(--text-subtle);
   font-size: 0.9rem;
 }
+
+/* Wrapper for large Mermaid diagrams: render at legible width, scroll horizontally.
+   The inner min-width stops Mermaid scaling the SVG down to fit the column;
+   the SVG's own natural max-width still caps smaller diagrams. */
+.mermaid-scroll {
+  overflow-x: auto;
+  padding-bottom: 4px; /* keep the scrollbar off the diagram */
+}
+.mermaid-scroll .docusaurus-mermaid-container {
+  min-width: 1180px;
+}

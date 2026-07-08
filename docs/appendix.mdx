@@ -6,33 +6,32 @@ description: The original information-architecture redesign artefacts that back 
 ---
 
 import ArtifactEmbed from '@site/src/components/ArtifactEmbed';
-import DownloadLink from '@site/src/components/DownloadLink';
 
 # Appendix, Source Artefacts
 
-Before this assessment I produced an independent information-architecture redesign of the Mistral documentation. Those artefacts are the **evidence base for [Exercise 1](/exercise-1/executive-summary)** and the **reference material for [Exercise 4](/exercise-4-onprem-ia)**. They are preserved here in their original form so they can be inspected directly, not just summarised.
+The information-architecture redesign behind this submission is captured in three artefacts: the **evidence base for [Exercise 1](/exercise-1/executive-summary)** and the **reference material for [Exercise 4](/exercise-4-onprem-ia)**. They are embedded here so they can be inspected directly, not just summarised, and they track the audit and the live site's current product terminology (Vibe, Products). These artefacts show the six intent-based sections; they do not visualise the orthogonal **managed/self-hosted surface axis** (paired entry points, per-page surface tags, and version-gating; see [R1](/exercise-1/recommendations#r1)), which is specified as a design rather than shipped as a running prototype here.
 
 :::note Why this is in the submission
-The assessment asks for visible judgement. These artefacts *are* the judgement, a full 420-page placement decision, a navigable IA, and a landing-page design, made before I knew how they would be presented. Embedding the originals lets a reviewer check the reasoning at source.
+The assessment asks for visible judgement. These artefacts *are* the judgement: a structural placement decision, a navigable IA, and a landing-page design. Embedding them lets a reviewer check the reasoning at source.
 :::
 
 ## 1. Information Architecture tree
 
-The complete proposed IA, navigable to leaf level: six intent-based top-level sections, per-section page counts, and a one-line "writer rule" for each. This is the target structure that the [Exercise 1 recommendations](/exercise-1/recommendations) move pages into.
+The complete proposed IA, navigable to leaf level: six intent-based top-level sections, per-section page counts, and a one-line "writer rule" for each. This is the target structure that the [Exercise 1 recommendations](/exercise-1/recommendations) move pages into (the managed/self-hosted surface axis is a later addition and is not drawn here).
 
 <ArtifactEmbed
-  src="/artifacts/ia-tree.html"
+  src="/artifacts/ia-tree"
   title="Mistral Docs, Information Architecture Tree"
-  caption="420 pages · 6 top-level sections · Evaluate & Ship folded into Build · Cookbooks as a utility link"
+  caption="6 top-level sections + a managed/self-hosted surface axis · Evaluate & Ship folded into Build · Cookbooks as a utility link"
   height={620}
 />
 
 ## 2. Landing-page design
 
-The proposed documentation home: a six-item primary nav, four persona entry points (with the **sovereign / on-prem deployment path featured**), a journey strip, and a featured-models grid. The persona entry points are the mechanism behind [R6](/exercise-1/recommendations#r6), personas as entry points, not top-level sections.
+The proposed documentation home: a six-item primary nav, four persona entry points (with the **sovereign / on-prem deployment path featured**, which sets the self-hosted surface), a journey strip, and a featured-models grid. The persona entry points are the mechanism behind [R1](/exercise-1/recommendations#r1), personas as entry points rather than top-level sections, and they share the [Example Rewrite](/exercise-1/example-rewrite)'s job-first phrasing: the reader's question as the card title, the product name inside as the answer.
 
 <ArtifactEmbed
-  src="/artifacts/landing-page-design.html"
+  src="/artifacts/landing-page-design"
   title="Mistral Docs, Landing Page Design"
   caption="Persona entry points route into shared, task-based content"
   height={620}
@@ -40,28 +39,14 @@ The proposed documentation home: a six-item primary nav, four persona entry poin
 
 ## 3. Recommendations document
 
-The written strategy behind the redesign, executive summary, current-state analysis, seven named design principles, the recommended IA with page counts, a use-case taxonomy for Build, and the landing-page rationale.
+The written strategy behind the redesign: executive summary, current-state analysis, seven named design principles, the recommended IA with page counts, a use-case taxonomy for Build, and the landing-page rationale. Its central theses:
 
-<DownloadLink href="/artifacts/ia-recommendations.docx">Download the IA recommendations document (DOCX)</DownloadLink>
+> The primary navigation should reflect how users work (orient, build, evaluate, ship), not how Mistral names its products and audiences.
 
-Its central theses, quoted directly:
+> The current Developers section is a catch-all.
 
-> "The primary navigation should reflect how users work, orientation, building, evaluating, shipping, not how Mistral's teams are organised internally."
-
-> "The current Developers section is a junk drawer."
-
-Both are load-bearing in [Exercise 1](/exercise-1/executive-summary): the first is the basis of [R4](/exercise-1/recommendations#r4), the second of [R3](/exercise-1/recommendations#r3).
-
-## 4. The audit data set
-
-The 420-row placement audit is explorable on the [Audit Findings](/exercise-1/audit-findings) page and downloadable below.
-
-<DownloadLink href="/artifacts/documentation-audit.csv">Download the audit (CSV, 420 rows)</DownloadLink>
-
-:::caution Two versions exist, by design
-An earlier draft of the audit kept `Deploy`, `Le Chat`, and `Evaluate & Ship` as separate top-level sections and let `Reference` bloat to 176 pages. The canonical version used throughout collapses those into the six-section model and holds Reference to 49. The delta is documented in the [Exercise 1 Appendix](/exercise-1/appendix#a-note-on-versioning) as evidence for [R5](/exercise-1/recommendations#r5).
-:::
+Both are load-bearing in [Exercise 1](/exercise-1/executive-summary): together they are the basis of [R1](/exercise-1/recommendations#r1), the reorganisation.
 
 :::tip Related
-Read [About this submission](/about) for how these artefacts were made and where AI assisted.
+See the [Overview](/overview#where-ai-assisted) for how these artefacts were made and where AI assisted.
 :::
