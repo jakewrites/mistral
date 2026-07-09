@@ -14,7 +14,6 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'exercise-1/executive-summary',
-        'exercise-1/audit-findings',
         'exercise-1/recommendations',
         'exercise-1/example-rewrite',
         'exercise-1/after-it-ships',

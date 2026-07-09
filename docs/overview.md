@@ -42,7 +42,7 @@ Audience calibration is easiest to judge across the whole submission, because th
 
 (Exercise 4 is absent from the table by design: it is an information-architecture blueprint, not prose written for a single reader, so it has no one voice to place here.)
 
-Two readers sit outside that table but inside the proposal. The **Vibe user**, Mistral's least technical, who never touches the API, is served through Products (UI-first) and the plain-language side of shared pages; [the Audit walks all three reader journeys](/exercise-1/audit-findings#three-journeys). And one reader further out than any human: the **agent**. Mistral's own models, coding assistants, and Vibe itself now fetch and cite these docs, yet today they hit a missing `robots.txt` and dead links in the machine index (a third-party probe scores the site **7/100**). The spectrum runs Vibe user → developer → infrastructure engineer → agent, and the agent wants what the humans do: one canonical home per thing ([R3](/exercise-1/recommendations#r3)).
+Two readers sit outside that table but inside the proposal. The **Vibe user**, Mistral's least technical, who never touches the API, is served through Products (UI-first) and the plain-language side of shared pages. And one reader further out than any human: the **agent**. Mistral's own models, coding assistants, and Vibe itself now fetch and cite these docs, yet today they hit a missing `robots.txt` and dead links in the machine index (a third-party probe scores the site **7/100**). The spectrum runs Vibe user → developer → infrastructure engineer → agent, and the agent wants what the humans do: one canonical home per thing ([R3](/exercise-1/recommendations#r3)).
 
 ## Where the judgement is mine
 

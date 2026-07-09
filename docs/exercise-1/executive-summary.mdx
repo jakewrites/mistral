@@ -11,74 +11,50 @@ import StatGrid from '@site/src/components/StatGrid';
 
 <p className="doc-meta">Exercise 1 · Documentation critique &amp; rewrite, delivered as an audit-backed strategy proposal</p>
 
-I reviewed the Mistral docs the way a new developer actually arrives at them: with one job, *build an AI application*, and no map of Mistral's product names. This summary follows that journey, because where it broke is exactly where the information architecture does. The docs are technically rich and, in places, excellent. The problem I hit was structural, not editorial: the site is organised around Mistral's product surfaces and audience labels, not around what a developer is trying to do.
+**What I did.** I reviewed docs.mistral.ai the way a new developer arrives at it: one job, *build an AI application*, and no map of Mistral's product names. I walked that path end to end and marked every place it broke. The docs are technically rich and often excellent, so the problem I hit was structural, not editorial. The site is organised around Mistral's product surfaces and audience labels, not around what the reader is trying to do.
 
-## The journey, and where it broke
-
-[Getting Started](https://docs.mistral.ai/getting-started/platform-overview) worked: I found my use case and got oriented. Then it stalled in three places, and all three are about *where things live* rather than how they are written:
-
-- **The API-key gate.** To make a call I needed a key, and the key lives in **Studio**. But Studio presents itself as a standalone *product* with its own getting-started, when all I actually needed was the console to get past step one, so I had to decode "Studio" before I could proceed.
-- **No Build front door.** The docs on *building* (conversations, agents, RAG) sit filed under **Studio**, again under a separate **Developers** section, and again as quickstarts back in Getting Started. Three homes for "how do I build," and no single **Build** section to aim at.
-- **A product picker, not a journey.** The [platform overview](https://docs.mistral.ai/getting-started/platform-overview) opens *"Mistral AI has three products. Pick the one that matches what you want to do."* That is a product menu where a developer needs a path: *build an AI application*.
-
-This is the developer's walk, the one I could test end to end. It is one of three primary journeys, and the [Audit](/exercise-1/audit-findings#three-journeys) shows the same architecture serving the other two readers, the non-technical Vibe user and the admin, from one structure.
+**What I found.** Findability is weak, and one cause sits under everything. My score is **findability 4/10**, scoped on purpose: findability is the axis I actually tested, and it gates the rest, because the best page is worthless if the reader can't reach it. (On content quality, which I did not audit site-wide, the one path I ran end to end reads as good content with thin edges. The concrete gaps are in [Exercise 3](/exercise-3-api-validation).)
 
 <StatGrid
   stats={[
-    {value: '6', label: 'Pages flagged for action', sub: '2 move · 4 redirect'},
-    {value: '6', label: 'Top-level sections', sub: 'Re-cut around user intent, plus a managed/self-hosted surface axis'},
-    {value: '0', label: 'Rewrites the nav re-cut needs', sub: 'The six-section move ships as redirects; the surface axis is a separate, larger effort'},
+    {value: '4/10', label: 'Findability today', sub: 'The axis I tested; content quality scoped out'},
+    {value: '6', label: 'Intent-based sections', sub: 'Re-cut around the reader’s job, plus a managed/self-hosted surface axis'},
+    {value: '0', label: 'Rewrites the nav re-cut needs', sub: 'It ships as page moves and redirects, not rewrites'},
   ]}
 />
 
-## The score, and where I aimed it
+## Where the developer path broke
 
-The brief is deliberately open, so the first judgement is where to aim. I aimed at information architecture because findability is the binding constraint on a platform expanding this fast: new and renamed surfaces (Le Chat became Vibe, La Plateforme became Studio, on-prem grew), a widening model lineup, and readers who now range from non-technical Vibe users to infrastructure engineers. Reorganising is also the cheapest and most time-sensitive fix: it raises findability without rewriting content, and structure only gets more expensive to change as the site grows.
+Getting Started worked. Then three things stopped me, all about *where things live*, not how they are written:
 
-The brief asks for a score. Mine is **findability: 4/10**, and it is deliberately scoped. Findability is the axis I actually assessed, and the one worth acting on. I did not audit content quality (I didn't test every page, verify code, or hunt for gaps), so I won't put a number on what I didn't measure. Findability gates everything: the best page is worthless if the reader can't reach it. This proposal moves that number without touching content.
+- **The API-key gate.** The key lives in **Studio**, which presents itself as a standalone product, so I had to decode "Studio" to learn it was just the console I needed.
+- **No Build front door.** Guidance on building (conversations, agents, RAG) is filed three ways at once: under Studio, under a separate **Developers** section, and as quickstarts in Getting Started. Nowhere single to aim at.
+- **A product picker, not a path.** The platform overview opens *"Mistral AI has three products. Pick the one that matches what you want to do."* That is a menu of products where the reader has a job.
 
-I won't hide behind the scope, though. On the one path I did run end to end, the Getting Started and API quickstart validated in [Exercise 3](/exercise-3-api-validation), the writing is accurate and the code works, but the content has gaps a review would close: the quickstart never shows a successful response, so a first-timer can't recognise one; the API reference's sample response doesn't match live output (the `id` format and the `created` type both differ); the SDK Clients page assumes the key is already set and drops the reader into a `KeyError`; and the error glossary is both minimal and unreachable from the page where the error happens. Directionally that is good content with thin edges, not a broken corpus. I'm calling it a read rather than a score because it covers one journey, not the whole site, and because content quality is the axis findability unlocks: none of those gaps reach a reader who can't find the page.
-
-## On the rewrite
-
-The brief also asks for a rewrite. My conclusion is that the highest-value change is structural: a page-by-page rewrite treats the symptom, not the cause. The craft itself is demonstrated on the [Example Rewrite](/exercise-1/example-rewrite) page, where the page that broke the walk above, the live platform overview, is rewritten in full against the live copy.
+All three are structural. That points to one cause.
 
 ## The core finding
 
-The three breakages in the journey share one cause.
+All three breakages share one cause: **the navigation names an audience where it should name work.** `Developers` is a top-level section, yet the developer's real workspace (Studio) sits inside `Products`, and what `Developers` mostly holds is reference that isn't developer-only, since an admin reads the changelog too. Audience labels can't keep up with a reader spectrum that now runs from infrastructure engineers to Vibe users who never touch the API; task labels don't have to. The same failure repeats at page level: look-up content has no single home, with the glossary in Get Started, the crawler spec at the site root, and the error glossary blended with 125 teaching cookbooks.
 
-> The navigation names an audience where it should name work. `Developers` is a top-level section, yet the developer's actual workspace, Studio, sits inside `Products`, and what `Developers` mostly holds is reference (changelogs, SDKs, the error glossary) that is not exclusive to developers: an admin tracking new model releases reads the changelog too. The audience label fails in both directions, and each new persona or product multiplies the split. Mistral's audiences now run from infrastructure engineers to Vibe users who never touch the API and just write prompts. Audience-named sections cannot keep up with that spectrum, but task-named ones do not have to.
+## What I propose
 
-The same failure repeats at page level: look-up content has no single home. The glossary sits in Get Started, the crawler spec at the site root, and the error glossary in a Resources bucket blended with 125 teaching cookbooks. Canonical content, one home and one URL per thing, is the through-line of this proposal.
+Replace the audience-named top navigation with a six-section, intent-based architecture, and move every page to the section that matches the reader's job.
 
-And once you are inside, the nav stops orienting you: `Products` holds both Studio and Vibe with no breadcrumbs or persistent "you are here", so a reader dropped in by search cannot tell which product they are in ([wayfinding](/exercise-1/audit-findings#wayfinding)).
-
-## The proposal in one sentence
-
-Replace the audience-named top navigation with a six-section, intent-based architecture, **Get Started · Models · Build · Products · Admin · Reference**, and move every page to the section that matches the reader's job.
-
-| Today: audience & surface named | Proposed: intent named |
+| Today: audience &amp; surface named | Proposed: intent named |
 |---|---|
 | Getting Started · Models · Products · **Developers** · Admin · **API** | Get Started · Models · **Build** · Products · Admin · **Reference** |
 
-The substantive change is dissolving `Developers`: its guidance goes to **Build**, its reference to **Reference**, and the landing page becomes the developer's entry point. The **API** reference tab folds into **Reference**. On top of the sections sits one control the taxonomy deliberately leaves out: a **managed/self-hosted surface axis** (paired entry points inside Products, per-page surface tags, and version-gating for self-hosted). Whether you run Mistral as SaaS or on your own infrastructure is a *surface*, not a section. The reader's journey (orient, choose, build, run) decides where a page lives. The tab names follow from that.
+The substantive change is dissolving `Developers`: its guidance goes to **Build**, its reference to **Reference**, and the developer persona becomes a landing-page entry point. Over the sections sits one axis the taxonomy leaves out, a **managed/self-hosted surface** (paired entry points, per-page tags, version-gating), because whether you run Mistral as SaaS or on your own hardware is a surface, not a section. Building finally gets a front door, and Studio drops back to the console it is.
 
-In journey terms: building finally gets a **Build** front door, and Studio drops back to the console tool it is, documented in Products.
+The [Recommendations](/exercise-1/recommendations) turn this into a phased plan. The core re-cut ships as page moves and redirects with no rewrites, though the 301s have to be complete and permanent so search rankings and inbound links survive; the managed/self-hosted surface axis is a larger, separate content-engineering effort, sequenced after the quick win. The brief also asks for a rewrite, and my answer is that the highest-value change is structural, with the page-level craft shown in full on the [Example Rewrite](/exercise-1/example-rewrite). The docs also have a machine audience now, and the same canonical-URL discipline fixes it ([R3](/exercise-1/recommendations#r3)).
 
-## How big a change this really is
+## The rest of Exercise 1
 
-The core nav re-cut is bounded: the Developers content re-homes into Get Started, Build, and Reference, four redundant pages gain redirects, and two look-up pages change parent. No page bodies are rewritten to move them, which is what makes the re-cut cheap relative to its navigational payoff.
-
-Two costs I won't paper over. First, every moved URL is one that external links, search rankings, and agent citations point at today. A 301 preserves most of that equity but not all, so the redirects have to be complete and permanent, and I'd stage them and watch Search Console rather than ship them in a single cut. Second, the managed/self-hosted surface axis ([R1](/exercise-1/recommendations#r1)) is not a redirect job at all: single-sourcing shared pages into two rendered trees and version-gating the self-hosted one is a content-engineering programme measured in quarters, not the days the redirects take. The [Sequencing](/exercise-1/recommendations#sequencing) plan splits the two on purpose, so the cheap win ships first and the expensive part is scoped honestly rather than hidden inside a "low effort" label.
-
-## Also built for the agent reader
-
-Mistral's docs now have a machine audience: its own models, third-party coding assistants, and Vibe itself fetch and cite these pages. Today they hit walls a human wouldn't. `docs.mistral.ai` has no `robots.txt` (it 404s), no content negotiation (the per-page Markdown that `llms.txt` advertises 404s), and broken links inside `llms.txt` itself. A third-party readiness probe scores the site **7/100**, which is a useful smoke alarm but not the argument. The argument is that these are cheap config and build fixes with no new content, and they are the same canonical-URL discipline the human recommendations need, one audience further out. The evidence and the fixes are in [R3](/exercise-1/recommendations#r3).
-
-## What's in the rest of this exercise
-
-The rest of this exercise is four pages: [The Audit](/exercise-1/audit-findings) (how I looked, what's already strong, the evidence), the [Recommendations](/exercise-1/recommendations) and their sequencing, one worked [Example Rewrite](/exercise-1/example-rewrite), and the [Open Questions](/exercise-1/open-questions) this proposal is deliberately unsure about.
+- [Recommendations](/exercise-1/recommendations): three, sequenced by impact and effort.
+- [Example Rewrite](/exercise-1/example-rewrite): the platform overview rebuilt in full.
+- [Open Questions](/exercise-1/open-questions): the calls the proposal is deliberately unsure about.
 
 :::tip Next step
-Read [The Audit](/exercise-1/audit-findings): how the evidence was gathered, what the current docs get right, and the three findings.
+Read [Recommendations](/exercise-1/recommendations).
 :::

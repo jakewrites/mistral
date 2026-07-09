@@ -21,7 +21,7 @@ The task set is drawn from the journeys the audit found broken, so "success" mea
 
 | Task | Finding it tests |
 |---|---|
-| Create or reset an API key | The Studio decode ([the walk](/exercise-1/audit-findings#how-i-audited)) |
+| Create or reset an API key | The Studio decode ([the developer walk](/exercise-1/executive-summary#where-the-developer-path-broke)) |
 | Find what error code 1500 means | Error glossary placement ([R2](/exercise-1/recommendations#r2)) |
 | Pick a model for RAG | Model selection (Models) |
 | Turn on SSO for your team | Admin |
@@ -54,7 +54,7 @@ The metric I would fight for is **time-to-first-successful-call**: the elapsed t
 
 Word of mouth says "the docs are better." Ticket data says where they still fail. Two cheap mechanisms:
 
-- **Tag docs-related tickets at triage.** Tag "couldn't find it" separately from "found it but it was wrong". The first measures this proposal; the second feeds the content backlog the [structural audit](/exercise-1/audit-findings#how-i-audited) deliberately scoped out.
+- **Tag docs-related tickets at triage.** Tag "couldn't find it" separately from "found it but it was wrong". The first measures this proposal; the second feeds the content backlog the [executive summary](/exercise-1/executive-summary) deliberately scoped out.
 - **Track the top deflection articles.** These are the ten pages support agents link most often. If agents keep linking a page, readers are not finding it themselves. That is a placement bug before it is a content bug.
 
 ## Keeping Engineering, Product, and Support equally served {#equally-served}
@@ -64,7 +64,7 @@ A docs team's failure mode is serving whoever is loudest that quarter. The defen
 | Stakeholder | What they give the docs | What they get back | Mechanism |
 |---|---|---|---|
 | Engineering | Review of technical accuracy; the OpenAPI spec as the source for the API reference | Fewer interruptions, because the reference answers what Slack used to | Docs-as-code: PRs reviewed like code, and the reference generated from the spec so samples cannot drift (the drift is real; see [Gap 2 in Exercise 3](/exercise-3-api-validation#documentation-gaps-i-found)) |
-| Product | Launch briefs and feature intent, before GA; deprecation notices at sunset | Docs shipped with the feature, not weeks after; no stale guidance after retirement | Docs in the launch definition-of-done (no docs, no GA sign-off) and in the deprecation checklist (a capability is not retired until every surface that teaches it, cookbooks included, is banner-marked or removed; the [Audit](/exercise-1/audit-findings#a-freshness-issue-validation-surfaced) caught a live miss) |
+| Product | Launch briefs and feature intent, before GA; deprecation notices at sunset | Docs shipped with the feature, not weeks after; no stale guidance after retirement | Docs in the launch definition-of-done (no docs, no GA sign-off) and in the deprecation checklist (a capability is not retired until every surface that teaches it, cookbooks included, is banner-marked or removed; the audit caught a live miss) |
 | Support | Ticket tags and deflection-article data | A backlog that fixes the pages costing them the most tickets | A standing docs-backlog lane fed by ticket data, triaged monthly against the same impact/effort grid as the [Sequencing plan](/exercise-1/recommendations#sequencing) |
 
 Requests from all three land in one backlog and get ranked by the same impact and effort criteria used to sequence R1 to R3. That is what "equally served" means in practice: not equal airtime, but one transparent queue where a Support-sourced fix can outrank a Product-sourced nice-to-have on evidence.
