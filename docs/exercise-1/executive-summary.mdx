@@ -11,9 +11,9 @@ import StatGrid from '@site/src/components/StatGrid';
 
 <p className="doc-meta">Exercise 1 · Documentation critique &amp; rewrite, delivered as an audit-backed strategy proposal</p>
 
-**What I did.** I reviewed docs.mistral.ai the way a new developer arrives at it: one job, *build an AI application*, and no map of Mistral's product names. I walked that path end to end and marked every place it broke. The docs are technically rich and often excellent, so the problem I hit was structural, not editorial. The site is organised around Mistral's product surfaces and audience labels, not around what the reader is trying to do.
+The documentation is technically strong, but its information architecture is organised around Mistral's products instead of the jobs developers are trying to accomplish. As a result, common workflows are harder to discover than they should be: readers must learn Mistral's internal product model before they can find the guidance they need.
 
-**What I found.** The content is hard to discover through the current IA: navigation routes by product name and audience label, so you need to know what Mistral calls something before you can find it. Search ends up doing the job the navigation should. My score is **findability 4/10**, scoped on purpose: findability is the axis I actually tested, and it gates the rest, because the best page is worthless if the reader can't reach it. (On content quality, which I did not audit site-wide, the one path I ran end to end reads as good content with thin edges. The concrete gaps are in [Exercise 3](/exercise-3-api-validation).)
+I audited the documentation by following a single end-to-end task—building an AI application from scratch, without assuming any prior knowledge of Mistral's product names. The problems I encountered were overwhelmingly structural rather than editorial. Individual pages were generally well written; finding the right page was the difficult part.
 
 <StatGrid
   stats={[
