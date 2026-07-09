@@ -13,13 +13,12 @@ import StatGrid from '@site/src/components/StatGrid';
 
 **What I did.** I reviewed docs.mistral.ai the way a new developer arrives at it: one job, *build an AI application*, and no map of Mistral's product names. I walked that path end to end and marked every place it broke. The docs are technically rich and often excellent, so the problem I hit was structural, not editorial. The site is organised around Mistral's product surfaces and audience labels, not around what the reader is trying to do.
 
-**What I found.** Findability is weak, and one cause sits under everything. My score is **findability 4/10**, scoped on purpose: findability is the axis I actually tested, and it gates the rest, because the best page is worthless if the reader can't reach it. (On content quality, which I did not audit site-wide, the one path I ran end to end reads as good content with thin edges. The concrete gaps are in [Exercise 3](/exercise-3-api-validation).)
+**What I found.** The content is hard to discover through the current IA: navigation routes by product name and audience label, so you need to know what Mistral calls something before you can find it. Search ends up doing the job the navigation should. My score is **findability 4/10**, scoped on purpose: findability is the axis I actually tested, and it gates the rest, because the best page is worthless if the reader can't reach it. (On content quality, which I did not audit site-wide, the one path I ran end to end reads as good content with thin edges. The concrete gaps are in [Exercise 3](/exercise-3-api-validation).)
 
 <StatGrid
   stats={[
-    {value: '4/10', label: 'Findability today', sub: 'The axis I tested; content quality scoped out'},
-    {value: '6', label: 'Intent-based sections', sub: 'Re-cut around the reader’s job, plus a managed/self-hosted surface axis'},
-    {value: '0', label: 'Rewrites the nav re-cut needs', sub: 'It ships as page moves and redirects, not rewrites'},
+    {value: ‘4/10’, label: ‘Findability today’, sub: ‘The axis I tested; content quality scoped out’},
+    {value: ‘6’, label: ‘Intent-based sections’, sub: ‘Re-cut around the reader’s job, plus a managed/self-hosted surface axis’},
   ]}
 />
 
