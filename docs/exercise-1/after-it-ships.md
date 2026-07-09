@@ -22,11 +22,11 @@ The task set is drawn from the journeys the audit found broken, so "success" mea
 | Task | Finding it tests |
 |---|---|
 | Create or reset an API key | The Studio decode ([the developer walk](/exercise-1/executive-summary#where-the-developer-path-broke)) |
-| Find what error code 1500 means | Error glossary placement ([R2](/exercise-1/recommendations#r2)) |
+| Find what error code 1500 means | Error glossary placement ([R3](/exercise-1/recommendations#r3)) |
 | Pick a model for RAG | Model selection (Models) |
 | Turn on SSO for your team | Admin |
-| Find how to self-host Le Chat | The surface axis ([R1](/exercise-1/recommendations#r1)) |
-| Find the changelog | The Developers junk drawer ([R1](/exercise-1/recommendations#r1)) |
+| Find how to self-host Le Chat | The surface axis ([R2](/exercise-1/recommendations#r2)) |
+| Find the changelog | The Developers junk drawer ([R2](/exercise-1/recommendations#r2)) |
 
 **Leading vs lagging.** Tree-test success and directness are the *leading* indicator: measurable before ship, cheap, and causal. The live signals below (time-to-first-successful-call, zero-result search, "couldn't find it" tickets) are *lagging*: they are the real-world outcome, but confounded, so they confirm the win rather than prove it.
 
@@ -42,9 +42,9 @@ A signal means nothing without a baseline, and an IA change needs two.
 
 | Recommendation | Signal to watch | What good looks like |
 |---|---|---|
-| [R1](/exercise-1/recommendations#r1): reorganise + dissolve Developers | 301 hit counts on redirected pages; zero-result searches for "changelog", "SDK", "error codes"; bounce and scroll-and-exit on section hubs and the landing page | Redirect traffic decays as links update and one canonical URL wins each query; the zero-result list shrinks; hubs route rather than dead-end, and persona entry points get clicked, not scrolled past |
-| [R2](/exercise-1/recommendations#r2): Reference discipline | Time-on-page for Reference, which should be short because it is a look-up surface; repeat visits to the same Reference page within a session | Reference visits get shorter, not longer; readers confirm and leave |
-| [R3](/exercise-1/recommendations#r3): agent-ready docs | `.md` links advertised in `llms.txt` that resolve; the isitagentready.com score against its 7/100 baseline; AI-bot hits and agent-sourced referrals in server logs once `robots.txt` ships | Every advertised `.md` URL returns 200; the agent-readiness score climbs off its 7/100 floor; AI crawlers appear in logs and cite canonical URLs, not duplicates |
+| [R2](/exercise-1/recommendations#r2): reorganise + dissolve Developers | Zero-result searches for "changelog", "SDK", "error codes"; bounce and scroll-and-exit on section hubs and the landing page | The zero-result list shrinks; hubs route rather than dead-end, and persona entry points get clicked, not scrolled past |
+| [R3](/exercise-1/recommendations#r3): Reference discipline | Time-on-page for Reference, which should be short because it is a look-up surface; repeat visits to the same Reference page within a session | Reference visits get shorter, not longer; readers confirm and leave |
+| [R4](/exercise-1/recommendations#r4): agent-ready docs | `.md` links advertised in `llms.txt` that resolve; the isitagentready.com score against its 7/100 baseline; AI-bot hits and agent-sourced referrals in server logs once `robots.txt` ships | Every advertised `.md` URL returns 200; the agent-readiness score climbs off its 7/100 floor; AI crawlers appear in logs and cite canonical URLs, not duplicates |
 
 ## The one product metric that matters most
 

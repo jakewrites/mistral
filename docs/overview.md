@@ -42,7 +42,7 @@ Audience calibration is easiest to judge across the whole submission, because th
 
 (Exercise 4 is absent from the table by design: it is an information-architecture blueprint, not prose written for a single reader, so it has no one voice to place here.)
 
-Two readers sit outside that table but inside the proposal. The **Vibe user**, Mistral's least technical, who never touches the API, is served through Products (UI-first) and the plain-language side of shared pages. And one reader further out than any human: the **agent**. Mistral's own models, coding assistants, and Vibe itself now fetch and cite these docs, yet today they hit a missing `robots.txt` and dead links in the machine index (a third-party probe scores the site **7/100**). The spectrum runs Vibe user → developer → infrastructure engineer → agent, and the agent wants what the humans do: one canonical home per thing ([R3](/exercise-1/recommendations#r3)).
+Two readers sit outside that table but inside the proposal. The **Vibe user**, Mistral's least technical, who never touches the API, is served through Products (UI-first) and the plain-language side of shared pages. And one reader further out than any human: the **agent**. Mistral's own models, coding assistants, and Vibe itself now fetch and cite these docs, yet today they hit a missing `robots.txt` and dead links in the machine index (a third-party probe scores the site **7/100**). The spectrum runs Vibe user → developer → infrastructure engineer → agent, and the agent wants what the humans do: one canonical home per thing ([R4](/exercise-1/recommendations#r4)).
 
 ## Where the judgement is mine
 
@@ -51,7 +51,7 @@ The assessment permits AI assistance and asks that my own thinking be clearly vi
 - **The audit's structure.** Choosing to reduce the review to three themed structural findings, each with a one-line placement rule behind it, rather than a page-by-page dump.
 - **The findability score.** Scoring findability (a 4, the axis I assessed) rather than grading content I did not audit, and saying so plainly.
 - **The six-section architecture plus an orthogonal managed/self-hosted surface axis**, and the placement principles behind it, including the genuinely contestable calls (modelling self-hosting as a surface rather than a section of its own, folding Evaluate & Ship into Build, and keeping Cookbooks as a utility link rather than a section).
-- **The prioritisation.** Sequencing R1's config-only parts first for a fast, low-risk win and holding the Reference admission test (R2) as a guardrail is a judgement about change management, not just ranking.
+- **The prioritisation.** Sequencing the URL and config fixes (R1) first for a fast, low-risk win and holding the Reference admission test (R3) as a guardrail is a judgement about change management, not just ranking.
 - **The task-based split in Exercise 2.** Treating *understand embeddings* and *design a retrieval system* as two different jobs, not one concept at two difficulty levels, and reconciling that with Exercise 1's split-by-task rule.
 - **The `input` vs `inputs` finding in Exercise 3**, noticing that the REST field and SDK argument disagree, and deciding it was worth foregrounding as the thing most likely to trip a reader.
 - **The Exercise 4 IA**, including the deliberate refusal to make a page-per-backend top level, and the specific borrowings from Kubernetes and Terraform.

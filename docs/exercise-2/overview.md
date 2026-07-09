@@ -14,7 +14,7 @@ The brief asks for one complex concept, **vector embeddings**, explained for two
 - [**What are embeddings?**](/exercise-2/version-a): the brief's Version A.
 - [**Design a retrieval system with embeddings**](/exercise-2/version-b): the brief's Version B.
 
-And I made a sharper cut than a difficulty split, the same one [Exercise 1](/exercise-1/recommendations#r1) argues for: **split by the reader's job, not their experience level.**
+And I made a sharper cut than a difficulty split, the same one [Exercise 1](/exercise-1/recommendations#r2) argues for: **split by the reader's job, not their experience level.**
 
 ## The two jobs
 
@@ -34,7 +34,7 @@ Both are technically accurate and grounded in Mistral's own `mistral-embed`. The
 
 ## Why two pages, not one progressive page
 
-The real objection is not "why not a *beginners-skip-this* toggle". Those fail, because they ask the reader to self-diagnose mid-sentence. It is the stronger one: *why not one page that starts simple and builds up?* That is genuine progressive disclosure, and it is exactly what [Exercise 1](/exercise-1/recommendations#r1) prescribes when a page serves two readers. So this split has to survive my own doctrine, or it is an inconsistency.
+The real objection is not "why not a *beginners-skip-this* toggle". Those fail, because they ask the reader to self-diagnose mid-sentence. It is the stronger one: *why not one page that starts simple and builds up?* That is genuine progressive disclosure, and it is exactly what [Exercise 1](/exercise-1/recommendations#r2) prescribes when a page serves two readers. So this split has to survive my own doctrine, or it is an inconsistency.
 
 It survives on the test Exercise 1 uses: **is this one job at two depths, or two different jobs?**
 

@@ -2,28 +2,53 @@
 slug: /exercise-1/recommendations
 title: 'Exercise 1 · Recommendations'
 sidebar_label: Recommendations
-description: Three evidence-based recommendations, each tied to specific audit findings.
+description: Four evidence-based recommendations, each tied to specific audit findings.
 ---
 
 import Recommendation from '@site/src/components/Recommendation';
 
 # Recommendations
 
-Three recommendations follow. Each uses the same template (Observation, Evidence, Recommendation, Expected impact, Effort, Priority) so they can be compared on equal terms. Every one cites the finding in [the Executive Summary](/exercise-1/executive-summary#the-core-finding) that motivated it. The [Sequencing](#sequencing) section below turns them into a phased plan, [Considerations](#considerations) raises a cross-cutting strategy question the recommendations surface (documenting self-hosted products), and [After it Ships](/exercise-1/after-it-ships) names the post-ship signal for each and the operating model behind them. The calls the proposal leaves open are named honestly on [Open Questions](/exercise-1/open-questions).
+Four recommendations follow. Each uses the same template (Observation, Evidence, Recommendation, Expected impact, Effort, Priority) so they can be compared on equal terms. Every one cites the finding in [the Executive Summary](/exercise-1/executive-summary#the-core-finding) that motivated it. The [Sequencing](#sequencing) section below turns them into a phased plan, [Considerations](#considerations) raises a cross-cutting strategy question the recommendations surface (documenting self-hosted products), and [After it Ships](/exercise-1/after-it-ships) names the post-ship signal for each and the operating model behind them. The calls the proposal leaves open are named honestly on [Open Questions](/exercise-1/open-questions).
 
-:::note The three at a glance
-**R1** re-cuts the top nav into six intent-based sections and dissolves the audience-named `Developers` section. **R2** restricts Reference to true look-ups and gathers the scattered ones into it. **R3** fixes the machine-readable fundamentals (`robots.txt`, content negotiation, a working `llms.txt`). R1 is the umbrella; R2 is its guardrail against drift, and R3 is the same canonical-URL discipline applied to the agent reader.
+:::note The four at a glance
+**R1** fixes canonical URLs and redirects the redundant pages. **R2** reorganises the top nav into six intent-based sections and dissolves `Developers`. **R3** restricts Reference to true look-ups. **R4** makes the docs agent-ready. R1 and R4 ship as config work; R2 is the structural change; R3 is its guardrail against drift.
 :::
 
 <Recommendation
   id="R1"
+  title="Make canonical URLs task-named, and redirect the redundant pages"
+  priority="P1"
+  impact="High"
+  effort="Low"
+  observation="Quickstart URLs carry persona and product segments (developer, vibe-work), and product names churn: the same quickstarts have already lived under le-chat paths. Four pages also resolve where a redirect belongs."
+  recommendation={<>Name each canonical URL for the <strong>task</strong>, not the persona or product: task names outlive brand names, as the retired <code>le-chat</code> paths show. Persona grouping belongs in the sidebar and on the landing page. Keep it out of the URL. 301-redirect the four redundant pages. No content changes, only URL work.</>}
+  expectedImpact="Inbound links and search authority stop splitting on every product rename, and readers never have to judge which copy of a page is current. Pure URL work: the cheapest recommendation here.">
+
+  The four flagged redirects:
+
+  | Resolves today | Should |
+  |---|---|
+  | `/developers` | Redirect into the task sections; the section dissolves under [R2](#r2) |
+  | `/products` | Redirect to the Get Started platform-overview orientation page |
+  | `/models/overview` | Redirect to `/models`, which does the same job |
+  | `/resources/cookbooks/quickstart` | Redirect to the first-api-request quickstart it duplicates |
+
+  One rule with no exceptions: quickstarts are orientation content, and orientation lives in Get Started for every persona, Admin included. A single admission rule is what stops audience buckets growing back.
+
+  **A canonicalization bug this surfaced.** Beyond the four redundant pages, the site serves the *same* page at two URLs through an optional `/en/` locale prefix: `docs.mistral.ai/en/studio-api/search-toolkit/changelog` and the same path without `/en/` both return `200`, rather than one `301`-ing to the other (verified live). Spot-checks across unrelated sections show the same double-`200`, so it is site-wide: *every* page has a duplicate. That is the canonical-URL problem at site scale: inbound links and search authority split across two forms, and an agent cannot tell which to cite. Neither form carries a `rel="canonical"` tag, so search engines get no signal which URL to index (verified 6 July 2026). By contrast `/fr/` is a genuine locale (the sitemap even lists the `/fr/` variants), which makes the bare-vs-`/en/` duplication a pure config defect: choose one canonical form, `301` the other, and add `rel="canonical"`. It compounds [R4](#r4)'s machine-readability point, since bots split authority on duplicate URLs exactly as humans do.
+
+</Recommendation>
+
+<Recommendation
+  id="R2"
   title="Reorganise the top navigation into six intent-based sections"
   priority="P1"
   impact="High"
   effort="Medium"
   observation="The top navigation encodes product surfaces and audiences (Products, Developers, Admin) rather than user goals, so readers must know which Mistral surface owns their task before they can navigate. Developers is the worst offender: an audience-named catch-all whose actual building work lives under Products › Studio."
-  recommendation={<>Adopt six task-based top-level sections, <strong>Get Started · Models · Build · Products · Admin · Reference</strong>, and move every page to the section that matches the reader's job. Dissolve the audience-named <strong>Developers</strong> section into them (orientation to Get Started, guidance to Build, reference to Reference), name each canonical URL for the <strong>task</strong> rather than the persona or product, and 301-redirect the redundant pages. Then add what the sections deliberately do not encode: an orthogonal <strong>surface axis</strong> (managed | self-hosted), threaded through the sections as paired entry points and version-gating, not a section of its own.</>}
-  expectedImpact="Navigation answers 'what do I want to do?' instead of 'which product is this, and who are you?'. This is the umbrella change the rest of the proposal builds on, and it caps top-nav cognitive load.">
+  recommendation={<>Adopt six task-based top-level sections, <strong>Get Started · Models · Build · Products · Admin · Reference</strong>, and move every page to the section that matches the reader's job. Dissolve the audience-named <strong>Developers</strong> section (orientation to Get Started, guidance to Build, reference to Reference). Then add what the sections deliberately do not encode: an orthogonal <strong>surface axis</strong> (managed | self-hosted), threaded through the sections as paired entry points and version-gating, not a section of its own.</>}
+  expectedImpact="Navigation answers 'what do I want to do?' instead of 'which product is this, and who are you?'. This is the structural change the rest of the proposal builds on, and it caps top-nav cognitive load.">
 
   This is the architecture the rest of the proposal moves pages into. The full target tree is the [Information Architecture redesign](/appendix) embedded in the Appendix.
 
@@ -40,27 +65,16 @@ Three recommendations follow. Each uses the same template (Observation, Evidence
 
   **Dissolve Developers.** [The core finding](/exercise-1/executive-summary#the-core-finding) has the evidence. An audience-named container has no admission rule, so nothing answers "does this page belong here?" Give every Developers page its one canonical home: orientation and quickstart links to Get Started, task guidance to Build, and reference material (changelogs, SDKs, the error glossary, migration guides) to Reference. The developer persona becomes a landing-page entry point, not a section. Removing the section stops the drift at its source, because an audience section can never enforce a content model, so it will always compete with the task sections for the same content.
 
-  **Task-named canonical URLs.** Quickstart URLs today carry persona and product segments (developer, vibe-work), and product names churn: the same quickstarts have already lived under `le-chat` paths. Name each canonical URL for the task, and 301-redirect the redundant pages:
-
-  | Resolves today | Should |
-  |---|---|
-  | `/developers` | Redirect into the task sections as the section dissolves |
-  | `/products` | Redirect to the Get Started platform-overview orientation page |
-  | `/models/overview` | Redirect to `/models`, which does the same job |
-  | `/resources/cookbooks/quickstart` | Redirect to the first-api-request quickstart it duplicates |
-
-  Beyond those four, the site serves the *same* page at two URLs through an optional `/en/` locale prefix: `docs.mistral.ai/en/studio-api/search-toolkit/changelog` and the same path without `/en/` both return `200`, rather than one `301`-ing to the other (verified live). Spot-checks across unrelated sections show the same double-`200`, so it is site-wide: every page has a duplicate, and neither form carries a `rel="canonical"` tag (verified 6 July 2026). By contrast `/fr/` is a genuine locale the sitemap lists, which makes the bare-vs-`/en/` duplication a pure config defect: choose one canonical form, `301` the other, add `rel="canonical"`. It compounds [R3](#r3)'s machine-readability point, since bots split authority on duplicate URLs exactly as humans do.
-
   **On Products.** The section keeps the live site's name because it already does the right job and readers know it. It is the counterpart to Build (building *with* the API versus *using* the products), and the one section whose reader may not be a developer at all, so its pages stay UI-first, name screens rather than endpoints, and link to Build for anything that teaches the API. Studio gets the same admission rule as Models: describe the console (what the screens do, where API keys live) and send API-building guidance to Build. Whether a product runs as managed SaaS or self-hosted is a question for the surface axis, so the self-hosted Le Chat pages live here too, tagged self-hosted and versioned.
 
   **Two audiences, one IA.** The six sections are a developer's journey, but the Vibe user shares two touchpoints with them, choosing a model and writing prompts. The IA serves both from one structure through progressive disclosure, not a second site or duplicated content. The [developer walk](/exercise-1/executive-summary#where-the-developer-path-broke) shows the pattern; the rule is to split by *task*, not audience, so a shared task like prompting is one progressive page while a Vibe-only task like driving Chat's UI lives only in Products.
 
-  **The surface axis fixes Models without a new section.** Choosing a model and operating a self-hosted cluster are two *surfaces* of one subject (managed and self-hosted), not two sections: self-hosting is *where* you run it, not *what* you are doing. A self-hosted section would strand SSO-on-self-hosted in Admin and version notes in Reference, so instead the IA threads a surface control through the sections. Inside Products, a product that ships both ways gets **paired entry points** (Vibe managed, Vibe self-hosted); the reader picks once and sees only their surface. Shared material is **single-sourced**, rendered into both trees and never copied, so it cannot fork; only genuinely different pages (install, configure, upgrade) get variants. Self-hosted trees are **version-gated** while managed stays unversioned ([Le Chat Enterprise ships both](https://mistral.ai/news/le-chat-enterprise/)). Each variant keeps its own URL, so search and agents land on the right surface (the canonical-URL discipline above), and every split page opens with a one-line surface marker linking its counterpart, since search will otherwise drop readers into the wrong tree. This is specified as a design, not yet prototyped: [Exercise 4](/exercise-4-onprem-ia) builds the self-hosted operate lifecycle and the [versioning policy](/exercise-4-onprem-ia#versioning) behind the gate. Where self-hosted content is sensitive enough to sit behind a login, [Considerations](#considerations) sets the single-sourcing and discoverability rules.
+  **The surface axis fixes Models without a new section.** Choosing a model and operating a self-hosted cluster are two *surfaces* of one subject (managed and self-hosted), not two sections: self-hosting is *where* you run it, not *what* you are doing. A self-hosted section would strand SSO-on-self-hosted in Admin and version notes in Reference, so instead the IA threads a surface control through the sections. Inside Products, a product that ships both ways gets **paired entry points** (Vibe managed, Vibe self-hosted); the reader picks once and sees only their surface. Shared material is **single-sourced**, rendered into both trees and never copied, so it cannot fork; only genuinely different pages (install, configure, upgrade) get variants. Self-hosted trees are **version-gated** while managed stays unversioned ([Le Chat Enterprise ships both](https://mistral.ai/news/le-chat-enterprise/)). Each variant keeps its own URL, so search and agents land on the right surface ([R1](#r1)'s canonical-URL discipline applied to surfaces), and every split page opens with a one-line surface marker linking its counterpart, since search will otherwise drop readers into the wrong tree. This is specified as a design, not yet prototyped: [Exercise 4](/exercise-4-onprem-ia) builds the self-hosted operate lifecycle and the [versioning policy](/exercise-4-onprem-ia#versioning) behind the gate. Where self-hosted content is sensitive enough to sit behind a login, [Considerations](#considerations) sets the single-sourcing and discoverability rules.
 
 </Recommendation>
 
 <Recommendation
-  id="R2"
+  id="R3"
   title="Make Reference the exact source of truth, and nothing more"
   priority="P2"
   impact="Medium"
@@ -84,7 +98,7 @@ Three recommendations follow. Each uses the same template (Observation, Evidence
 </Recommendation>
 
 <Recommendation
-  id="R3"
+  id="R4"
   title="Make the docs agent-ready, the machine side of findability"
   priority="P2"
   impact="High"
@@ -111,19 +125,20 @@ Three recommendations follow. Each uses the same template (Observation, Evidence
 
 ## Sequencing {#sequencing}
 
-Three recommendations are only useful in the right order, by impact, effort, and dependency.
+Four recommendations are only useful in the right order, by impact, effort, and dependency.
 
 | ID | Recommendation | Impact | Effort | Priority |
 |----|----------------|--------|--------|----------|
-| [R1](#r1) | Reorganise the top nav into six sections; dissolve Developers | High | Medium | **P1** |
-| [R2](#r2) | Make Reference the exact source of truth | Medium | Medium | **P2** |
-| [R3](#r3) | Make the docs agent-ready (robots.txt, `.md` negotiation) | High | Low | **P2** |
+| [R1](#r1) | Canonical URLs; 301-redirect redundant pages | High | Low | **P1** |
+| [R2](#r2) | Reorganise the top nav into six sections; dissolve Developers | High | Medium | **P1** |
+| [R3](#r3) | Make Reference the exact source of truth | Medium | Medium | **P2** |
+| [R4](#r4) | Make the docs agent-ready (robots.txt, `.md` negotiation) | High | Low | **P2** |
 
-R1 is one recommendation but two shipping phases, because its config-only parts can land long before the restructure:
+The sequencing follows effort and dependency:
 
-- **Phase 1, stop the bleeding (days):** ship R1's pure-config parts (the four redirects and the task-naming rule) alongside the **R3** infrastructure fixes (a docs `robots.txt`, working `.md` endpoints). No structural agreement needed, a visible win that de-risks the rest.
-- **Phase 2, restructure (weeks):** execute the rest of R1, the six-section re-cut and the dissolution of Developers. Page moves and redirects, with no rewrites, shipped together so readers get one coherent change.
-- **Phase 3, refine (ongoing):** apply **R2** as the guardrail that keeps Reference from drifting back to a catch-all.
+- **Phase 1, stop the bleeding (days):** ship **R1** (canonical URLs and the four redirects) alongside **R4** (a docs `robots.txt`, working `.md` endpoints). No structural agreement needed, a visible win that de-risks the rest.
+- **Phase 2, restructure (weeks):** execute **R2**, the six-section re-cut and the dissolution of Developers. Page moves and redirects, with no rewrites, shipped together so readers get one coherent change.
+- **Phase 3, refine (ongoing):** apply **R3** as the guardrail that keeps Reference from drifting back to a catch-all.
 
 Each phase should ship with a named success signal, captured against a pre-launch baseline, so "the restructure felt better" becomes a number. [After it Ships](/exercise-1/after-it-ships) defines the signal for each recommendation, the one product metric worth fighting for, and the operating model that keeps Engineering, Product, and Support equally served.
 
@@ -133,7 +148,7 @@ A few questions sit *above* the numbered recommendations, because they shape the
 
 ### Self-hosted products: single-sourced, and public even when gated
 
-[R1](#r1)'s surface axis handles the *public* self-hosted content (inference serving, config, upgrades), which is most of it. The harder subset is genuinely sensitive (private runbooks, customer topology, licence-gated components) and legitimately sits behind a login. Two rules hold **whether a page is public or gated**:
+[R2](#r2)'s surface axis handles the *public* self-hosted content (inference serving, config, upgrades), which is most of it. The harder subset is genuinely sensitive (private runbooks, customer topology, licence-gated components) and legitimately sits behind a login. Two rules hold **whether a page is public or gated**:
 
 1. **Single-source it.** Gating decides *who sees the rendered page*, never *where the source lives*. Gated pages are authored in the same repo and pipeline as the public docs; a separate private copy drifts, and drift in deployment docs is how a customer bricks a cluster.
 2. **Keep the *whether* public even when the *how* is gated.** Public docs must always state, in the open: that self-hosting exists, when to choose it, and the concrete path to the gated detail (a self-serve entitlement, or an explicit *"contact us"* route). A capability a public reader cannot discover is, to them, a capability that does not exist.
