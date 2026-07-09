@@ -81,7 +81,7 @@ export default function Home(): ReactNode {
           </p>
           <div className={styles.actions}>
             <Link className={styles.primaryBtn} to="/exercise-1/executive-summary">
-              Start with the audit
+              Start with the critique
             </Link>
             <Link className={styles.secondaryBtn} to="/overview">
               How to read this submission

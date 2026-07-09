@@ -79,7 +79,7 @@ const config: Config = {
         },
         {
           to: '/exercise-1/executive-summary',
-          label: 'The Audit',
+          label: 'The Critique',
           position: 'left',
         },
         {
@@ -96,7 +96,7 @@ const config: Config = {
           title: 'Assessment',
           items: [
             {label: 'Home', to: '/'},
-            {label: 'Exercise 1, Audit', to: '/exercise-1/executive-summary'},
+            {label: 'Exercise 1, Critique', to: '/exercise-1/executive-summary'},
             {label: 'Overview', to: '/overview'},
           ],
         },
