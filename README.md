@@ -19,10 +19,10 @@ The five exercises:
 ├── docs/                        # All exercise content (Markdown / MDX)
 │   ├── overview.md              # Orientation, AI-use disclosure, where the judgement is
 │   ├── exercise-1/              # Centrepiece: the documentation strategy proposal
-│   │   ├── executive-summary.mdx
-│   │   ├── audit-findings.mdx   # How I audited, what's strong, the three findings
-│   │   ├── recommendations.mdx  # Three recommendations (templated component)
+│   │   ├── executive-summary.mdx # Audit findings folded in: how I audited, the three findings
+│   │   ├── recommendations.mdx  # Four recommendations (templated component)
 │   │   ├── example-rewrite.mdx
+│   │   ├── after-it-ships.md    # Success signals and the operating model
 │   │   └── open-questions.md    # The calls the proposal deliberately leaves open
 │   ├── exercise-2/              # Vector embeddings, Version A & B
 │   ├── exercise-3-api-validation.mdx

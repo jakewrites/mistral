@@ -16,7 +16,7 @@ const exercises: ExerciseCard[] = [
     n: '01',
     title: 'Documentation Critique & Rewrite',
     blurb:
-      'A documentation strategy proposal for the Mistral docs: a full-site structural placement review, three findings, and five prioritised recommendations.',
+      'A documentation strategy proposal for the Mistral docs: a full-site structural placement review, three findings, and four prioritised recommendations.',
     to: '/exercise-1/executive-summary',
     tag: 'Centrepiece',
   },
