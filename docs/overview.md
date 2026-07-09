@@ -28,11 +28,11 @@ The role is about documentation systems, not isolated pages. Building the submis
 
 The remaining four exercises are shorter and self-contained. Each opens with an audience and a purpose statement, follows a consistent template, and ends with next steps.
 
-## One writer, five readers
+## The audiences I assumed
 
-Audience calibration is easiest to judge across the whole submission, because the same platform is written up five ways. The sharpest contrast is Exercise 3 against Exercise 5: the same API, once for a self-serve developer validating it alone at a terminal, once for a Solutions Engineer selling it in a room.
+Every exercise is written for a specific reader. Some briefs name that reader; others leave it to me. So this section states the audience I assumed for each, because the assumption is the decision that sets the register, the depth, and what the piece leaves out. The same platform is written up five ways, and the sharpest contrast is Exercise 3 against Exercise 5: the same API, once for a self-serve developer validating it alone at a terminal, once for a Solutions Engineer selling it in a room.
 
-| Exercise | Reader | What changes for them |
+| Exercise | Assumed reader | What the assumption changes |
 |---|---|---|
 | 1 | Docs and engineering leadership | Strategic register; every claim costed and evidenced; no tutorials |
 | 2A | Developer new to AI | Analogy before API; one mental model; no maths |
@@ -40,9 +40,9 @@ Audience calibration is easiest to judge across the whole submission, because th
 | 3 | Self-serve developer | Step-by-step, exact commands, verbatim outputs and error bodies |
 | 5 | Solutions Engineer | Terse and objection-driven; demo script and talk tracks; no code |
 
-(Exercise 4 is absent from the table by design: it is an information-architecture blueprint, not prose written for a single reader, so it has no one voice to place here.)
+(Exercise 4 is absent from the table by design: it is an information-architecture blueprint, not prose written for a single reader, so it assumes no one voice to place here.)
 
-Two readers sit outside that table but inside the proposal. The **Vibe user**, Mistral's least technical, who never touches the API, is served through Products (UI-first) and the plain-language side of shared pages. And one reader further out than any human: the **agent**. Mistral's own models, coding assistants, and Vibe itself now fetch and cite these docs, yet today they hit a missing `robots.txt` and dead links in the machine index (a third-party probe scores the site **7/100**). The spectrum runs Vibe user → developer → infrastructure engineer → agent, and the agent wants what the humans do: one canonical home per thing ([R4](/exercise-1/recommendations#r4)).
+Two more readers sit outside that table but inside the proposal, and the IA assumes both. The **Vibe user**, Mistral's least technical, who never touches the API, is served through Products (UI-first) and the plain-language side of shared pages. And one reader further out than any human: the **agent**. Mistral's own models, coding assistants, and Vibe itself now fetch and cite these docs, yet today they hit a missing `robots.txt` and dead links in the machine index (a third-party probe scores the site **7/100**). The spectrum runs Vibe user → developer → infrastructure engineer → agent, and the agent wants what the humans do: one canonical home per thing ([R4](/exercise-1/recommendations#r4)).
 
 ## Where the judgement is mine
 
